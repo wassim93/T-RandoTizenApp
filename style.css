@@ -55,11 +55,11 @@ body {
 	padding: 0;
 	min-height: 100vh;
 	font-family: 'Raleway', sans-serif;
-	background-image: url("images/back.jpg");
 }
 
 #login-panel {
 	/* The image used */
+	background-image: url("images/back.jpg");
 	background-color: #cccccc;
 	/* Used if the image is unavailable */
 	height: 500px;
@@ -230,7 +230,6 @@ footer {
 }
 
 .product_title {
-	color: white;
 	font-family: 'Nixie One', cursive;
 }
 
