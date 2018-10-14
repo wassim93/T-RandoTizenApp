@@ -233,6 +233,18 @@ footer {
 	font-family: 'Nixie One', cursive;
 }
 
+/* add product css*/
+
+.imageThumb {
+	max-height: 75px;
+	margin: 20px 10px 0 0;
+	padding: 1px;
+}
+
+
+
+/* end add product css */
+
 /*--//footer--*/
 
 /*-- /responsive design --*/
