@@ -22,20 +22,6 @@
 (function($) {
   "use strict";
 
-  /** add product scripts */
-  function SaveProduct() {
-    // check inputs
-    console.log($("#title").val());
-    console.log($("#desc").val());
-    console.log($("#price").val());
-    console.log($("#files").val());
-    console.log($("#phone").val());
-
-    
-  }
-
-  function checkFormValidation() {}
-
   /* - Comment Slider */
   function chkActiveSlider() {
     var slideNum = 0;

@@ -241,7 +241,23 @@ footer {
 	padding: 1px;
 }
 
+.error {
+	display: none;
+	margin-left: 10px;
+}
 
+.error_show {
+	color: red;
+	margin-left: 10px;
+}
+
+input.invalid, textarea.invalid {
+	border: 2px solid red;
+}
+
+input.valid, textarea.valid {
+	border: 2px solid green;
+}
 
 /* end add product css */
 

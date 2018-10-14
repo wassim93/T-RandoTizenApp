@@ -144,14 +144,15 @@
 
 						<!-- Billing -->
 						<div class="checkout-form">
-							<form>
+							<form id="myform">
 								<div class="col-md-6 col-sm-12 col-xs-12">
 									<h3>Add Product</h3>
 									<div class="billing-field">
 
 										<div class="col-md-6 form-group">
 											<label>Product Title *</label>
-											<input id="title" type="text" class="form-control" />
+											<input id="title" name="title" type="text" class="form-control" />
+											<span id="titleerr" name="titleerr"></span>
 										</div>
 										<div class="col-md-12 form-group">
 											<label>Type *</label>
@@ -166,24 +167,28 @@
 										</div>
 										<div class="col-md-6 form-group">
 											<label>description *</label>
-											<textarea id="desc" class="form-control"></textarea>
+											<textarea id="desc" name="desc" class="form-control"></textarea>
+											<span class="error">This field is required</span>
 										</div>
 										<div class="col-md-12 form-group">
 											<label>Price *</label>
-											<input id="price" type="text" class="form-control" />
+											<input id="price" name="price" type="text" class="form-control" />
+											<span class="error">This field is required</span>
 										</div>
 										<div class="col-md-6 form-group">
 											<label>Phone Number*</label>
-											<input id="phone" type="text" class="form-control" />
+											<input id="phone" name="phone" type="text" class="form-control" placeholder="must contain 8 numbers" />
+											<span class="error">This field is required</span>
 										</div>
 
 										<div class="col-md-6 form-group">
 											<input type="file" id="files" name="files[]" multiple />
 											<div id="preview" style="display:none;"></div>
+											<span class="error">This field is required</span>
 										</div>
 
 										<div class="col-md-6 form-group">
-											<button type="button" class="btn btn-success" onclick="SaveProduct();">Save</button>
+											<input id="save" type="button" class="btn btn-success" value="Save" />
 										</div>
 									</div>
 								</div>
@@ -211,24 +216,61 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
+	<script src="js/scripts.js"></script>
+
 
 	<script>
+		$(document).ready(function () {
+			$('#save').click(function (e) {
+				var isValid = true;
+				verifTextarea();
+				verifInputs();
+
+				if (isValid == false)
+					e.preventDefault();
+				else
+					if ($("#phone").val().length == 8) {
+						SaveProduct();
+						alert("submitted");
+
+					} else {
+						alert("error");
+						$("#phone").css({
+							"border": "1px solid red",
+							"background": "#FFCECE"
+						})
+					}
+			});
+		});
+
 
 		function SaveProduct() {
-			// check inputs
-			console.log($("#title").val());
-			console.log($("#type").val());
-			console.log($("#desc").val());
-			console.log($("#price").val());
-			console.log($("#files").val().replace("C:\\fakepath\\", ""));
-			console.log($("#phone").val());
+			var files = document.getElementById("files").files;
+			var images = [];
+			for (var i = 0; i < files.length; i++) {
+				images = files[i].name;
+			}
+			var data = { "title": $("#title").val(), "type": $("#type").val(), "desc": $("#desc").val(), "prix": $("#price").val(), "images": [images], "contact": $("#phone").val() };
+			//console.log(JSON.stringify({ data: data }));
+			$.ajax({
+				type: "POST",
+				url: "/webservices/PodcastService.asmx/CreateMarkers",
+				// The key needs to match your method's input parameter (case-sensitive).
+				data: JSON.stringify({ data: data }),
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function (data) { alert(data); },
+				failure: function (errMsg) {
+					alert(errMsg);
+				}
+			});
 
 
 		}
 	</script>
 	<script type="text/javascript">
+		$("#files").val("");
 		$(document).ready(function () {
-			$("#files").val("");
 			if (window.File && window.FileList && window.FileReader) {
 				$("#files").on("change", function (e) {
 					var files = e.target.files,
@@ -241,6 +283,7 @@
 							var file = e.target;
 							$("#preview").attr('style', 'display:flex;overflow-x: scroll;overflow-y: hidden;height: 110px;');
 							$("<img></img>", {
+								id: "prevthumbnail",
 								class: "imageThumb",
 								src: e.target.result,
 								title: file.filename
