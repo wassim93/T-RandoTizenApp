@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/AppCallee" version="1.0.0" viewmodes="maximized">
+    <tizen:app-control>
+        <tizen:src name="index.html"/>
+        <tizen:operation name="http://tizen.org/appcontrol/operation/appcall"/>
+    </tizen:app-control>
+    <tizen:application id="wB5q4Co7el.AppCallee" package="wB5q4Co7el" required_version="2.3"/>
+    <content src="index.html"/>
+    <feature name="http://tizen.org/feature/screen.size.all"/>
+    <icon src="icon.png"/>
+    <name>AppCallee</name>
+    <tizen:privilege name="http://tizen.org/privilege/application.info"/>
+    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <tizen:profile name="mobile"/>
+</widget>
