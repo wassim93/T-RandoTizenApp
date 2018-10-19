@@ -16,6 +16,20 @@ background-size: 400px 700px;
 .w3-third{
   opacity: 0.8;
 }
+input[type=text],textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+    margin: 1em
+}
+form{
+    margin: 1em 
+}
+button{
+ color: rgb(95, 199, 95) 
+}
 
 </style>
 <body class="w3-light-grey" onload="loadData()">
@@ -30,23 +44,26 @@ background-size: 400px 700px;
     <div class="w3-third">
     
       <div class="w3-white w3-text-grey w3-card-4">
-        <div class="w3-display-container">
-          <img  id="profile-img" src="https://www.w3schools.com/w3images/avatar_hat.jpg" style="width:100%" alt="Avatar">
-  
-          <div class="w3-display-bottomleft w3-container w3-text-black">
-            <h2 id="fullname">Jane Doe</h2>
-          </div>
-       
+        <div class="w3-display-container" align="center">
+          <h3>Complete your profile</h3> 
         </div>
         <div class="w3-container">
-          <div style="margin-top:1em;display:flex;align-content: center;justify-content: center;align-items: center">
-            <input type="file" name="" id="image" onchange="UploadFile()">
-        </div>
+         <form action="#" method="post" >
+            <input type="text" name="firstname" id="firstname" placeholder="firstname" required>
+            <input type="text" name="lastname" id="lastname" placeholder="lastname" required>
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="phoneNumber" required>
+            <input type="text" name="adress" id="adress" placeholder="adress" required>
 
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal" id="email"></i></p>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal" id="phone"></i></p>
-          <p ><i style="width:auto;" class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal" id="address"></i></p>
-          <hr>
+            <div align="center">
+                <input type="file" name="" id="image">
+                    <br>
+                <button type="submit" onclick="CompleteProfile(event)" >Next</button>
+            </div>
+               <br>
+               <div id="message" style="color:rgb(218, 57, 57)"></div>
+
+
+         </form>
 
         
         </div>
@@ -63,5 +80,5 @@ background-size: 400px 700px;
 
 
 </body>
-<script src="./js/profile/profile.js"></script>
+<script src="./js/profile/completeProfile.js"></script>
 </html>
