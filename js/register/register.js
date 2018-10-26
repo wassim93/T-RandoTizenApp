@@ -31,8 +31,8 @@ var register = (e) => {
                         break;
                     case 200:
                          message.innerHTML = `<a class="w3l-register-p" href="file:///home/aymen/workspace/AppCallee/index.html>Successfully registred  proceed to login</a>`;
-                    
-                    break;
+                         window.location = "file:///home/aymen/workspace/AppCallee/index.html"
+                    break; 
                 }
             }
 
