@@ -1,0 +1,51 @@
+* {
+    font-family: Lucida Sans, Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #FE4365;
+    color: #FFFFFF;
+    margin: 0px auto;
+    padding: 20px;
+    font-size: 20px;
+}
+
+header h1 {
+    margin-top: 10px;
+    font-size: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+#content {
+    margin-top: 20px;
+    text-align: center;
+}
+
+button {
+    margin-top: 20px;
+    height: 35px;
+    width: 150px;
+    font-size: 20px;
+    background-color: #ffffff;
+    outline: 0 none;
+    color: #FE4365;
+    vertical-align: middle;
+    border-radius: 0px;
+    box-shadow: 0px 0px 0px 0px #ffffff;
+}
+
+#icon-table {
+    height: 320px;
+    width: 240px;
+    text-align: center;
+    margin: auto;
+}
+
+.svg-icon {
+    float: left;
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+    margin: 5px;
+}

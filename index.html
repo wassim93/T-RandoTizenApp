@@ -61,23 +61,23 @@
 
 </head>
 
-<body id="login-panel">
+<body id="login-panel" onload="checkConnected()">
 	<div class=" w3l-login-form" id="login-form">
 		<h2>SIGN IN</h2>
-		<form action="#" method="POST">
+		<form action="#" method="POST" onsubmit="login(event)">
 
 			<div class=" w3l-form-group">
 				<label>Username:</label>
 				<div class="group">
 					<i class="fas fa-user"></i>
-					<input type="text" class="form-control" placeholder="Username" required="required" />
+					<input type="text" class="form-control" placeholder="Username" required="required"  id="username"/>
 				</div>
 			</div>
 			<div class=" w3l-form-group">
 				<label>Password:</label>
 				<div class="group">
 					<i class="fas fa-unlock"></i>
-					<input type="password" class="form-control" placeholder="Password" required="required" />
+					<input type="password" class="form-control" placeholder="Password" required="required"  id="password"/>
 				</div>
 			</div>
 			<div class="forgot">
@@ -85,46 +85,54 @@
 			</div>
 			<button type="submit">Login</button>
 		</form>
+		<p class=" w3l-register-pp" id="message"></p>	
 		<p class=" w3l-register-p">Don't have an account?<a href="#" onclick="gotoregister();" id="gotoregister" class="register">
 				Register</a></p>
 	</div>
 
 	<div class=" w3l-login-form" id="register-form" style="display:none;">
 		<h2>SIGN UP</h2>
-		<form action="#" method="POST">
+		<form  method="POST" onsubmit="register(event)">
 
 			<div class=" w3l-form-group">
 				<label>Username:</label>
 				<div class="group">
 					<i class="fas fa-user"></i>
-					<input type="text" class="form-control" placeholder="Username" required="required" />
+					<input type="text" class="form-control" placeholder="Username" required="required" id="usernamer" />
 				</div>
 			</div>
 			<div class=" w3l-form-group">
 				<label>Email:</label>
 				<div class="group">
 					<i class="fas fa-envelope"></i>
-					<input type="text" class="form-control" placeholder="Email" required="required" />
+					<input type="text" class="form-control" placeholder="Email" required="required"  id="email" />
 				</div>
 			</div>
 			<div class=" w3l-form-group">
 				<label>Password:</label>
 				<div class="group">
 					<i class="fas fa-unlock"></i>
-					<input type="password" class="form-control" placeholder="Password" required="required" />
+					<input type="password" class="form-control" placeholder="Password" required="required" id="passwordfirst"  />
 				</div>
 			</div>
 			<div class=" w3l-form-group">
 				<label>Retype Password:</label>
 				<div class="group">
 					<i class="fas fa-unlock"></i>
-					<input type="password" class="form-control" placeholder="Retype Password" required="required" />
-				</div>
-			</div>
+					<input type="password" class="form-control" placeholder="Retype Password" onkeyup="checkPassword()" required="required" id="passwordsecond" />
 
+				</div>
+				<div id="messagecheck"></div>
+			</div>
+			<p class=" w3l-register-pp" id="message1"></p>	
 			<button type="submit">Register</button>
 		</form>
-		<p class=" w3l-register-p">Already have an account ?<a href="#" onclick="gotologin();" class="signup"> Sign Up</a></p>
+		<p class=" w3l-register-p">Already have an account ?<a href="#" onclick="gotologin();" class="signup"> Sign Up</a><br>
+		
+
+		</p>
+	
+	        
 	</div>
 
 
@@ -163,9 +171,17 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
+<<<<<<< HEAD
 
 </body>
 
 <!-- Mirrored from premiumlayers.net/demo/html/hiking/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:02 GMT -->
+=======
+	<script src="js/login//login.js"></script>
+	<script src="js/register/register.js"></script>
+</body>
+
+<!-- Mirr ored from premiumlayers.net/demo/html/hiking/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:02 GMT -->
+>>>>>>> LoginRegisterBranch
 
 </html>

@@ -95,7 +95,13 @@ p.w3l-register-p {
 	text-align: center;
 	margin-top: 2em;
 }
-
+p.w3l-register-pp{
+	color: rgb(202, 55, 55);
+	font-size: 13px;
+	text-align: center;
+	margin-top: 1cm
+	
+}
 .w3l-login-form {
 	background: rgba(92, 91, 91, 0.4);
 	max-width: 500px;
