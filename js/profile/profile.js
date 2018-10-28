@@ -22,7 +22,7 @@ var loadData = () => {
 var UploadFile = (e) => {
 
   document.getElementById("loading").innerHTML = `<img src="./image/loader.gif" width="150px">`
-  var file = document.querySelector('input[type="file"]').files[0];
+  var file = document.getElementById('image').files[0];
   getBase64(file).then(
     data => {
 
