@@ -5,7 +5,7 @@
 <html lang="en" class="">
 <!--<![endif]-->
 
-<!-- Mirrored from premiumlayers.net/demo/html/hiking/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:44 GMT -->
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/services.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:40 GMT -->
 
 <head>
 	<meta charset="utf-8">
@@ -16,7 +16,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Product Detail - Hiking</title>
+	<title>Events - Hiking</title>
 
 	<!-- Standard Favicon -->
 	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
@@ -36,6 +36,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
 	<!-- Library -->
 	<link rel="stylesheet" type="text/css" href="libraries/lib.css">
 
@@ -44,17 +45,18 @@
 	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
 	<link rel="stylesheet" type="text/css" href="css/shortcode.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="css/shop/shop-detail.css">
+	<link rel="stylesheet" type="text/css" href="css/event/eventhome.css">
+
+
 
 
 	<!--[if lt IE 9]>
 		<script src="js/html5/respond.min.js"></script>
-	<![endif]-->
-
+    <![endif]-->
 
 </head>
 
-<body onload="getProductDetails();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+<body onload="getData();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
 		<div id="site-loader" class="load-complete">
@@ -65,7 +67,6 @@
 			</div>
 		</div><!-- Loader /- -->
 
-		<!-- Header Section -->
 		<header class="container-fluid no-padding header-section">
 
 			<div class="container-fluid no-padding menu-block">
@@ -100,8 +101,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
-									 aria-expanded="false">EVENTS</a>
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
@@ -132,82 +132,65 @@
 				<div class="container">
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
-						<li class="active">Shop Detail</li>
+						<li class="active">Events</li>
 					</ol>
 				</div>
 			</div><!-- Page Header /- -->
 
-			<div class="padding-40"></div>
-
-			<!-- Container -->
-			<div class="container">
-				<div class="row shop-single">
-					<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-						<div class="col-md-6 col-sm-6 col-xs-12 entry-summary">
-
-							<div id="slideProd" class="siema">
-
-							</div>
-
-							<div class="container" style="display: ruby-base-container;">
-								<div style="padding: 2px;display: inline-flex;">
-
-									<button id="sliderbtn" class="prev">prev</button>
-									<button id="sliderbtn" class="next">next</button> </div>
-							</div>
+			<!-- Features Section -->
+			<div id="features-section" class="container-fluid no-left-padding no-right-padding features-section" style="padding-top: 30px;padding-bottom: 0;">
+				<!-- Container -->
+				<div class="container">
+					<!-- Section Header -->
+					<div class="section-header" style="margin-bottom: 30px;">
+						<h3>Which Adventure You Needs</h3>
+						<h6>This Week</h6>
+					</div><!-- Section Header /- -->
+					<!-- Row -->
+					<div class="row">
+						<!-- Carousel -->
+						<div id="slider" class="features-carousel">
+							<!-- Features Box -->
 
 
-							<img id="prodImg" style="display:none;" alt="Shop" />
+						</div><!-- Carousel /- -->
+					</div><!-- Row /- -->
+				</div><!-- Container /- -->
+			</div><!-- Features Section /- -->
+	</div>
+	<!-- Features Section -->
 
-						</div>
+	<!-- Destination Section -->
+	<div id="destination-section" class="container-fluid no-left-padding no-right-padding destination-section" style="padding-top: 100px;">
+		<!-- Container -->
+		<div class="container">
+			<!-- Section Header -->
+			<div class="section-header">
+				<h3>Attractive Plans</h3>
+				<h6>our destinations</h6>
+			</div><!-- Section Header /- -->
 
-
-
-						<div class="col-md-6 col-sm-6 col-xs-12 entry-summary">
-							<h3 id="prodTitle" class="product_title"></h3>
-
-							<div>
-								<p style="float:right;">Posted : <span data-livestamp="" id="date"></span></p>
-								<p id="phone">Contact : </p>
-								<p id="type">Type : </p>
-
-							</div>
-							<div class="price">
-								<p id="prodPrice"></p>
-							</div>
-							<!-- Reviews Tab -->
-							<div class="col-md-12 col-sm-12 col-xs-12 wc-tabs-wrapper no-padding">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs wc-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#tab-description" role="tab" data-toggle="tab">Description</a></li>
-								</ul>
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="tab-description">
-										<p id="prodDes"></p>
-									</div>
-
-								</div>
-							</div><!-- Reviews Tab /- -->
-
-						</div><!-- Entry Summary /- -->
-					</div>
-
-
-				</div>
-			</div><!-- Container /- -->
+			<!-- Row -->
+			<div id="eventlist" class="row">
 
 
 
 
-		</main>
-		<!-- Footer Section -->
-		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
-			Developed By: Dream Team
-			<p>Copyright &copy 2018</p>
+			</div><!-- Row /- -->
+		</div><!-- Container /- -->
+	</div><!-- Destination Section /- -->
 
-		</footer><!-- Footer Section /- -->
+	</main>
+
+	<!-- Footer Section -->
+	<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+
+		Developed By: Dream Team
+		<p>Copyright &copy 2018</p>
+
+	</footer><!-- Footer Section /- -->
+
 
 
 	</div>
@@ -220,11 +203,7 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
-	<script src="js/Shop/detailshop.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/siema@1.5.1/dist/siema.min.js"></script>
-
+	<script src="js/Event/homeevent.js"></script>
 
 
 
@@ -237,6 +216,6 @@
 
 </body>
 
-<!-- Mirrored from premiumlayers.net/demo/html/hiking/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:46 GMT -->
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/services.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:40 GMT -->
 
 </html>

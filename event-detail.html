@@ -5,7 +5,7 @@
 <html lang="en" class="">
 <!--<![endif]-->
 
-<!-- Mirrored from premiumlayers.net/demo/html/hiking/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:44 GMT -->
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/destination.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:40 GMT -->
 
 <head>
 	<meta charset="utf-8">
@@ -16,7 +16,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Product Detail - Hiking</title>
+	<title>Destination - Hiking</title>
 
 	<!-- Standard Favicon -->
 	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
@@ -36,6 +36,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
 	<!-- Library -->
 	<link rel="stylesheet" type="text/css" href="libraries/lib.css">
 
@@ -44,17 +45,14 @@
 	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
 	<link rel="stylesheet" type="text/css" href="css/shortcode.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" type="text/css" href="css/shop/shop-detail.css">
-
 
 	<!--[if lt IE 9]>
 		<script src="js/html5/respond.min.js"></script>
-	<![endif]-->
-
+    <![endif]-->
 
 </head>
 
-<body onload="getProductDetails();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
 		<div id="site-loader" class="load-complete">
@@ -100,8 +98,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
-									 aria-expanded="false">EVENTS</a>
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
@@ -124,7 +121,6 @@
 				</div><!-- Container /- -->
 			</div>
 		</header><!-- Header Section /- -->
-
 		<main>
 
 			<!-- Page Header -->
@@ -132,75 +128,70 @@
 				<div class="container">
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
-						<li class="active">Shop Detail</li>
+						<li class="active">Event Details</li>
 					</ol>
 				</div>
 			</div><!-- Page Header /- -->
 
-			<div class="padding-40"></div>
-
-			<!-- Container -->
-			<div class="container">
-				<div class="row shop-single">
-					<div class="col-md-12 col-sm-12 col-xs-12 no-padding">
-						<div class="col-md-6 col-sm-6 col-xs-12 entry-summary">
-
-							<div id="slideProd" class="siema">
-
-							</div>
-
-							<div class="container" style="display: ruby-base-container;">
-								<div style="padding: 2px;display: inline-flex;">
-
-									<button id="sliderbtn" class="prev">prev</button>
-									<button id="sliderbtn" class="next">next</button> </div>
-							</div>
-
-
-							<img id="prodImg" style="display:none;" alt="Shop" />
-
-						</div>
 
 
 
-						<div class="col-md-6 col-sm-6 col-xs-12 entry-summary">
-							<h3 id="prodTitle" class="product_title"></h3>
 
-							<div>
-								<p style="float:right;">Posted : <span data-livestamp="" id="date"></span></p>
-								<p id="phone">Contact : </p>
-								<p id="type">Type : </p>
+			<!-- Tour List Section -->
+			<div class="container-fluid no-left-padding no-right-padding tour-list-section" style="padding-top: 30px;padding-bottom:0;">
+				<!-- Container -->
+				<div class="container">
 
-							</div>
-							<div class="price">
-								<p id="prodPrice"></p>
-							</div>
-							<!-- Reviews Tab -->
-							<div class="col-md-12 col-sm-12 col-xs-12 wc-tabs-wrapper no-padding">
-								<!-- Nav tabs -->
-								<ul class="nav nav-tabs wc-tabs" role="tablist">
-									<li role="presentation" class="active"><a href="#tab-description" role="tab" data-toggle="tab">Description</a></li>
-								</ul>
-								<!-- Tab panes -->
-								<div class="tab-content">
-									<div role="tabpanel" class="tab-pane active" id="tab-description">
-										<p id="prodDes"></p>
+					<!-- Row -->
+					<div class="row">
+						<!-- Tour List -->
+						<div class="col-md-6 col-sm-12 col-xs-6 tour-list">
+							<div class="tour-content">
+								<div class="col-md-5 col-sm-5 col-xs-12 no-padding">
+									<img src="images/tour-list1.jpg" alt="Tour Place" />
+								</div>
+								<div class="col-md-7 col-sm-7 col-xs-12 no-left-padding no-right-padding tour-detail">
+									<h3><span>Europe Travel</span> With Me</h3>
+									<div class="tour-time">
+										<span><i class="fa fa-map-marker" style="color: red;"></i> 13 Times</span>
+										<span><i class="fa fa-map-marker" style="color: green;"></i> 23 Activities</span>
+									</div>
+									<p>That this group would somehow form a family that's the way we all became the Brady Bunch. </p>
+									<div class="tour-rate">
+										<div class="pull-left">
+											<h5><i class="fa fa-money" style="color:green;"></i><span>40 Dt</span></h5><br>
+											<h5><i class="fa fa-phone" style="color: green;"></i><span>53313557</span></h5>
+
+
+										</div>
+										<div class="pull-right">
+											<h5><i class="fa fa-list-ol" style="color:dimgrey;"></i><span>40 places </span></h5><br>
+											<h5><i class="fa fa-calendar" style="color:black;"></i><span>27-10-2018</span></h5>
+
+										</div>
+
 									</div>
 
+
+
+									<div class="tour-rate">
+										<br>
+										<button class="btn btn-success" onclick="participate(this);">Participate</button>
+									</div>
 								</div>
-							</div><!-- Reviews Tab /- -->
-
-						</div><!-- Entry Summary /- -->
-					</div>
+							</div>
+						</div><!-- Tour List /- -->
 
 
-				</div>
-			</div><!-- Container /- -->
 
-
+					</div><!-- Row /- -->
+				</div><!-- Container /- -->
+			</div><!-- Tour List Section /- -->
 
 
 		</main>
+
+		<!-- Footer Section -->
 		<!-- Footer Section -->
 		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
@@ -208,6 +199,8 @@
 			<p>Copyright &copy 2018</p>
 
 		</footer><!-- Footer Section /- -->
+
+
 
 
 	</div>
@@ -220,23 +213,11 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
-	<script src="js/Shop/detailshop.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/siema@1.5.1/dist/siema.min.js"></script>
-
-
-
-
-
-
-
-
-
+	<script src="js/Event/eventdetail.js"></script>
 
 
 </body>
 
-<!-- Mirrored from premiumlayers.net/demo/html/hiking/shop-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:46 GMT -->
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/destination.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:40 GMT -->
 
 </html>

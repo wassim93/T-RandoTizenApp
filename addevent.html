@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!--[if lt IE 9 ]> <html class="lt_ie9"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="">
+<!--<![endif]-->
+
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:46 GMT -->
+
+<head>
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Add Event - Hiking</title>
+
+    <!-- Standard Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+
+    <!-- For iPhone 4 Retina display: -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114-precomposed.png">
+
+    <!-- For iPad: -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72x72-precomposed.html">
+
+    <!-- For iPhone: -->
+    <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57x57-precomposed.png">
+
+    <!-- Library - Google Font Familys -->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+    <!-- Library -->
+    <link rel="stylesheet" type="text/css" href="libraries/lib.css">
+
+    <!-- Custom - Theme CSS -->
+    <link rel="stylesheet" type="text/css" href="css/plugins.css">
+    <link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
+    <link rel="stylesheet" type="text/css" href="css/shortcode.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!--[if lt IE 9]>
+		<script src="js/html5/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+    <div class="main-container">
+        <!-- Loader -->
+        <div id="site-loader" class="load-complete">
+            <div class="loader">
+                <div class="loader-inner ball-clip-rotate">
+                    <div></div>
+                </div>
+            </div>
+        </div><!-- Loader /- -->
+
+        <header class="container-fluid no-padding header-section">
+
+            <div class="container-fluid no-padding menu-block">
+                <!-- Container -->
+                <div class="container">
+                    <!-- nav -->
+                    <nav class="navbar navbar-default ow-navigation">
+                        <div class="navbar-header">
+
+                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                                class="navbar-toggle collapsed" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+
+                                </span>
+                            </button>
+
+                            <a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
+                            <div class="profile-section">
+                                <a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+
+                            </div>
+
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbar">
+                            <hr style="margin-bottom: 0px;">
+                            <ul class="nav navbar-nav" style="margin-top: 0px;">
+                                <li><a href="blog.html" title="Blog">HOME</a></li>
+
+                                <li>
+                                    <a href="events.html" title="events" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">EVENTS</a>
+                                    <i class="ddl-switch fa fa-angle-down"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
+                                        <li><a href="myevents.html" title="My Events">My Events</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active dropdown">
+                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">SHOP</a>
+                                    <i class="ddl-switch fa fa-angle-down"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
+                                        <li><a href="myproducts.html" title="My Products">My Products</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
+
+                    </nav><!-- nav /- -->
+                </div><!-- Container /- -->
+            </div>
+        </header><!-- Header Section /- -->
+
+        <main>
+
+            <!-- Page Header -->
+            <div class="container-fluid no-padding page-header">
+                <div class="container">
+                    <ol class="breadcrumb">
+                        <li><a href="#">Home</a></li>
+                        <li class="active">Event</li>
+                    </ol>
+                </div>
+            </div><!-- Page Header /- -->
+
+            <div class="padding-40"></div>
+
+            <!-- Checkout -->
+            <div class="container-fluid no-left-padding no-right-padding woocommerce-checkout">
+                <!-- Container -->
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Billing -->
+                        <div class="checkout-form">
+                            <form id="myform" method="POST" onsubmit="SaveEvent();">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <h3>Add Event</h3>
+                                    <div class="billing-field">
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Event Title *</label>
+                                            <input id="title" name="title" type="text" class="form-control" />
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <label>Event Date *</label>
+                                            <input id="date" name="date" type="date" class="form-control" />
+
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Type *</label>
+                                            <div class="select">
+                                                <select id="type" class="form-control">
+                                                    <option>Cycling </option>
+                                                    <option>Hiking</option>
+                                                    <option>Wild Life</option>
+                                                    <option>Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>description *</label>
+                                            <textarea id="desc" name="desc" class="form-control"></textarea>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Departure *</label>
+                                            <input id="depart" name="depart" type="text" class="form-control"
+                                                placeholder="From" />
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Destination *</label>
+                                            <input id="destination" name="destination" type="text" class="form-control"
+                                                placeholder="To" />
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Price *</label>
+                                            <input id="price" name="price" type="number" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Available Places *</label>
+                                            <input id="nbplace" name="nbplace" type="number" class="form-control" />
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <label>Phone Number*</label>
+                                            <input id="phone" name="phone" type="text" class="form-control" placeholder="must contain 8 numbers" />
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <input type="file" id="files" name="files[]" multiple />
+                                            <div id="preview" style="display:none;"></div>
+                                        </div>
+
+                                        <div class="loader" id="submitLoader" style="width: 25px;margin: 15px auto;height: 13px;display: none;">
+                                            <div>
+                                                <div style="animation: rotate .75s 0s linear infinite;border:2px solid #E2B13C ;-webkit-animation: rotate .75s 0s linear infinite;"></div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div id="msg" style="width: 75%;display:none;margin:0 auto 5px auto">Event
+                                                Added Successfully</div>
+                                        </div>
+
+                                        <div class="col-md-6 form-group">
+                                            <input id="save" style="width:100%;" type="button" class="btn btn-success"
+                                                value="Save" />
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div><!-- Billing /- -->
+                    </div>
+                </div><!-- Container /- -->
+            </div><!-- Checkout /- -->
+
+        </main>
+        <!-- Footer Section -->
+        <footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+
+            Developed By: Dream Team
+            <p>Copyright &copy 2018</p>
+
+        </footer><!-- Footer Section /- -->
+    </div>
+
+    <!-- JQuery v1.12.4 -->
+    <script src="js/jquery-1.12.4.min.js"></script>
+
+    <!-- Library - Js -->
+    <script src="libraries/lib.js"></script>
+
+    <!-- Library - Theme JS -->
+    <script src="js/functions.js"></script>
+    <script src="js/scripts.js"></script>
+
+
+    <script>
+        var imgSrcs = [];
+
+        $(document).ready(function () {
+
+            $('#save').click(function (e) {
+                var isValid = true;
+                verifTextarea();
+                verifInputs();
+
+                if (isValid == false)
+                    e.preventDefault();
+                else
+                    if ($("#phone").val().length == 8) {
+                        SaveEvent();
+
+                    } else {
+                        alert("error");
+                        $("#phone").css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        })
+                    }
+            });
+        });
+
+
+        $("#files").val("");
+        $(document).ready(function () {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#files").on("change", function (e) {
+                    var files = e.target.files,
+                        filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.filename = files[i].name.split('.')[0];
+                        fileReader.onload = (function (e) {
+                            var file = e.target;
+                            // fill array of images with data selected to send to request	 
+
+
+                            $("#preview").attr('style', 'display:flex;overflow-x: scroll;overflow-y: hidden;height: 100px;');
+                            $("<img></img>", {
+                                id: "prevthumbnail",
+                                class: "imageThumb",
+                                src: e.target.result,
+                                title: file.filename
+                            }).appendTo("#preview");
+
+
+                            // fill image array with 64 base images 
+                            //filter image base 64 from prefixes data:image/....
+                            var strImage = e.target.result.replace(/^data:image\/[a-z]+;base64,/, "");
+                            imgSrcs.push(JSON.parse(JSON.stringify({ "image": strImage })));
+
+                        });
+
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else { alert("Your browser doesn't support to File API") }
+        });
+
+
+
+        function SaveEvent() {
+
+            //loader show 
+            $("#submitLoader").css("display", "block");
+            var xhr = new XMLHttpRequest();
+            var url = "http://localhost:8000/AddEvent";
+            xhr.open("POST", url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    $("#submitLoader").css("display", "none");
+                    $("#msg").css("display", "block");
+                    $('#msg').fadeIn();
+                    $('#msg').fadeOut(2000, function () { window.location.href = "events.html"; }
+                    );
+                }
+            };
+            var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "image": imgSrcs, "contact": $("#phone").val(), "date": $("#date").val(), "pointDepart": $("#depart").val(), "pointArrive": $("#destination").val(), "nbrPlace": $("#nbplace").val(), "niveau": "" });
+            xhr.send(data);
+
+        }
+    </script>
+
+    <script>
+        function initAutocomplete() {
+
+            var depart = document.getElementById('depart');
+            var destination = document.getElementById('destination');
+            depart.value = "";
+            destination.value = "";
+            var autocomplete = new google.maps.places.Autocomplete(depart);
+            var autocomplete2 = new google.maps.places.Autocomplete(destination);
+            autocomplete.addListener('place_changed', function () {
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+            });
+            autocomplete2.addListener('place_changed', function () {
+                var place = autocomplete2.getPlace();
+                if (!place.geometry) {
+                    alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+            });
+        }
+    </script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxmYzwxbs1PlNhSN8yAVEPvNRfXinvKfs&libraries=places&callback=initAutocomplete"
+        async defer></script>
+
+
+
+
+</body>
+
+<!-- Mirrored from premiumlayers.net/demo/html/hiking/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:46 GMT -->
+
+</html>

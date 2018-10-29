@@ -1,0 +1,24 @@
+#slideEvent {
+    overflow: hidden;
+    direction: ltr;
+    width: 270px;
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+#sliderbtn {
+    background-color: #232323;
+    border: 1px solid rgba(35, 35, 35, 0.5);
+    border-radius: 0;
+    position: relative;
+    width: 46px;
+    height: 46px;
+    margin: 0;
+    -webkit-transition: all 1s ease 0s;
+    -moz-transition: all 1s ease 0s;
+    -o-transition: all 1s ease 0s;
+    transition: all 1s ease 0s;
+    padding: 0;
+    color: #fff;
+}
