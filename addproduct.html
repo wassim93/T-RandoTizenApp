@@ -97,7 +97,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
 									 aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
@@ -144,7 +144,7 @@
 
 						<!-- Billing -->
 						<div class="checkout-form">
-							<form id="myform">
+							<form id="myform" method="POST" onsubmit="SaveProduct();">
 								<div class="col-md-6 col-sm-12 col-xs-12">
 									<h3>Add Product</h3>
 									<div class="billing-field">
@@ -158,10 +158,10 @@
 											<label>Type *</label>
 											<div class="select">
 												<select id="type" class="form-control">
-													<option>United </option>
-													<option> States</option>
-													<option>United States</option>
-													<option>United States</option>
+													<option>Sac </option>
+													<option>Vetements</option>
+													<option>Equipement</option>
+													<option>Autres</option>
 												</select>
 											</div>
 										</div>
@@ -187,9 +187,20 @@
 											<span class="error">This field is required</span>
 										</div>
 
-										<div class="col-md-6 form-group">
-											<input id="save" type="button" class="btn btn-success" value="Save" />
+										<div class="loader" id="submitLoader" style="width: 25px;margin: 15px auto;height: 13px;display: none;">
+											<div>
+												<div style="animation: rotate .75s 0s linear infinite;border:2px solid #E2B13C ;-webkit-animation: rotate .75s 0s linear infinite;"></div>
+											</div>
 										</div>
+										<div>
+											<div id="msg" style="width: 75%;display:none;margin:0 auto 5px auto">Product Added Successfully</div>
+										</div>
+
+										<div class="col-md-6 form-group">
+											<input id="save" style="width:100%;" type="button" class="btn btn-success" value="Save" />
+										</div>
+
+
 									</div>
 								</div>
 
@@ -200,12 +211,13 @@
 			</div><!-- Checkout /- -->
 
 		</main>
+<!-- Footer Section -->
+<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
-		<!-- Footer Section -->
-		<footer class="footer-main container-fluid no-padding footer-section2">
+		Developed By: Dream Team
+		<p>Copyright &copy 2018</p>
 
-		</footer><!-- Footer Section /- -->
-
+	</footer><!-- Footer Section /- -->
 	</div>
 
 	<!-- JQuery v1.12.4 -->
@@ -217,10 +229,15 @@
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
 	<script src="js/scripts.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js"></script>
 
 
 	<script>
+		var imgSrcs = [];
+
 		$(document).ready(function () {
+
 			$('#save').click(function (e) {
 				var isValid = true;
 				verifTextarea();
@@ -231,7 +248,6 @@
 				else
 					if ($("#phone").val().length == 8) {
 						SaveProduct();
-						alert("submitted");
 
 					} else {
 						alert("error");
@@ -244,31 +260,6 @@
 		});
 
 
-		function SaveProduct() {
-			var files = document.getElementById("files").files;
-			var images = [];
-			for (var i = 0; i < files.length; i++) {
-				images = files[i].name;
-			}
-			var data = { "title": $("#title").val(), "type": $("#type").val(), "desc": $("#desc").val(), "prix": $("#price").val(), "images": [images], "contact": $("#phone").val() };
-			//console.log(JSON.stringify({ data: data }));
-			$.ajax({
-				type: "POST",
-				url: "/webservices/PodcastService.asmx/CreateMarkers",
-				// The key needs to match your method's input parameter (case-sensitive).
-				data: JSON.stringify({ data: data }),
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (data) { alert(data); },
-				failure: function (errMsg) {
-					alert(errMsg);
-				}
-			});
-
-
-		}
-	</script>
-	<script type="text/javascript">
 		$("#files").val("");
 		$(document).ready(function () {
 			if (window.File && window.FileList && window.FileReader) {
@@ -281,14 +272,25 @@
 						fileReader.filename = files[i].name.split('.')[0];
 						fileReader.onload = (function (e) {
 							var file = e.target;
-							$("#preview").attr('style', 'display:flex;overflow-x: scroll;overflow-y: hidden;height: 110px;');
+							// fill array of images with data selected to send to request	 
+
+
+							$("#preview").attr('style', 'display:flex;overflow-x: scroll;overflow-y: hidden;height: 100px;');
 							$("<img></img>", {
 								id: "prevthumbnail",
 								class: "imageThumb",
 								src: e.target.result,
 								title: file.filename
 							}).appendTo("#preview");
+
+
+							// fill image array with 64 base images 
+							//filter image base 64 from prefixes data:image/....
+							var strImage = e.target.result.replace(/^data:image\/[a-z]+;base64,/, "");
+							imgSrcs.push(JSON.parse(JSON.stringify({ "image": strImage })));
+
 						});
+
 						fileReader.readAsDataURL(f);
 					}
 				});
@@ -297,7 +299,33 @@
 
 
 
+		function SaveProduct() {
+
+			//loader show 
+			$("#submitLoader").css("display", "block");
+			var xhr = new XMLHttpRequest();
+			var url = "http://localhost:8000/AddProduct";
+			xhr.open("POST", url, true);
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					$("#submitLoader").css("display", "none");
+					$("#msg").css("display", "block");
+					$('#msg').fadeIn();
+					$('#msg').fadeOut(2000, function () { window.location.href = "shop.html"; }
+					);
+				}
+			};
+			var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "images": imgSrcs, "contact": $("#phone").val(), "date": new Date() });
+			xhr.send(data);
+
+		}
+
+
+
+
+
 	</script>
+
 
 
 </body>

@@ -255,7 +255,7 @@
 }
 
 .features-box .features-detail {
-	background-color: #000;
+	/*background-color: #000;*/
 	display: inline-block;
 	width: 100%;
 	text-align: center;
@@ -1008,10 +1008,7 @@
 
 /* - Team Section */
 
-.team-section {
-	padding-bottom: 150px;
-	padding-top: 150px;
-}
+.team-section {}
 
 .team-content {
 	position: relative;
@@ -1395,7 +1392,7 @@
 .tour-rate h5 span {
 	color: #ffb215;
 	display: block;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: bold;
 	letter-spacing: 0.96px;
 }

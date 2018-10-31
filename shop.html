@@ -36,6 +36,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
 
 	<!-- Library -->
 	<link rel="stylesheet" type="text/css" href="libraries/lib.css">
@@ -52,7 +53,7 @@
 
 </head>
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+<body onload="getData();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
 		<div id="site-loader" class="load-complete">
@@ -97,7 +98,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
 									 aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
@@ -134,19 +135,40 @@
 				</div>
 			</div><!-- Page Header /- -->
 
-			<div class="padding-40"></div>
+
+			<!--no result view-->
+			<div id="NoResult" style="display:none;" class="container-fluid no-left-padding no-right-padding error-section">
+				<!-- Container -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5 col-sm-12 col-xs-12">
+							<img src="images/404.jpg" alt="404" />
+						</div>
+						<div class="col-md-7 col-sm-12 col-xs-12 error-content">
+							<h6>oops! No Product found!</h6>
+							<a href="addproduct.html" title="Add New Product">Add New Product</a>
+						</div>
+
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Error Section /- -->
+
+			<!--no result view-->
+
 
 			<!-- Container -->
-			<div class="container">
+			<div id="Results" class="container">
+				<div class="padding-40"></div>
 				<!-- Row -->
 				<div class="row shop">
+					<!--no result page-->
 					<div class="col-md-4 col-sm-5 col-xs-12 widget-area">
 						<!-- Widget Search -->
 						<aside class="widget widget_search">
 							<h3 class="widget-title">search</h3>
 							<div class="search-block">
 								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Type And Hit Enter">
+									<input id="searchInput" type="text" class="form-control" onkeyup="search();" placeholder="Type And Hit Enter">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
 									</span>
@@ -155,45 +177,9 @@
 						</aside><!-- Widget Search /- -->
 
 					</div><!-- Widget Area /- -->
-					<div class="col-md-8 col-sm-7 col-xs-12 content-area">
-						<ul class="products">
-							<!-- Product -->
-							<li class="product">
-								<a href="#">
-									<img src="images/shop1.jpg" alt="Product" />
-									<h3>sun glasses</h3>
+					<div id="prodlist" class="col-md-8 col-sm-7 col-xs-12 content-area">
+						<ul id="products" class="products">
 
-								</a>
-								<a href="shop-detail.html" class="addto-cart" title="More Details">More Details</a>
-							</li><!-- Product /- -->
-							<!-- Product -->
-							<li class="product">
-								<a href="#">
-									<img src="images/shop2.jpg" alt="Product" />
-									<h3>Trekking watches</h3>
-
-								</a>
-
-								<a href="shop-detail.html" class="addto-cart" title="More Details">More Details</a>
-							</li><!-- Product /- -->
-							<!-- Product -->
-							<li class="product">
-								<a href="#">
-									<img src="images/shop3.jpg" alt="Product" />
-									<h3>Travel T -shirts</h3>
-
-								</a>
-
-								<a href="shop-detail.html" class="addto-cart" title="More Details">More Details</a>
-							</li><!-- Product /- -->
-							<!-- Product -->
-							<li class="product">
-								<a href="#">
-									<img src="images/shop4.jpg" alt="Product" />
-									<h3>Trekking camp</h3>
-								</a>
-								<a href="shop-detail.html" class="addto-cart" title="More Details">More Details</a>
-							</li><!-- Product /- -->
 
 
 						</ul>
@@ -207,15 +193,106 @@
 								<li class="next"><a href="#"><i class="fa fa-angle-right "></i></a></li>
 							</ul>
 						</nav>
+
 					</div><!-- Widget Area -->
 
 				</div><!-- Row /- -->
 			</div><!-- Container /- -->
-			<div class="padding-90"></div>
+
+			<!--DeleteModal -->
+			<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #d9534f;color:#fff;padding-left: 35%;">
+							Delete Product
+						</div>
+						<div class="modal-body">
+							Are You Sure ?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button class="btn btn-danger btn-ok" onclick="deleteAction();" style="margin-top: 5px;margin-left: 0px;">Delete</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<!--UpdateModal-->
+
+			<div class="modal fade" id="update-prod" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #449d44;color:#fff;padding-left: 35%;">
+							update Product
+						</div>
+						<form method="POST" action="#" onsubmit="updateProduct();">
+							<div class="modal-body">
+								<!-- Billing -->
+								<div class="billing-field">
+									<div class="col-md-6 form-group">
+										<label>Product Title * </label>
+										<input id="uptitle" name="title" type="text" class="form-control" style="border:1px solid #ccc;" />
+									</div>
+									<div class="col-md-12 form-group">
+										<label>Type *</label>
+										<div class="select">
+											<select id="uptype" class="form-control">
+												<option>Sac </option>
+												<option>Vetements</option>
+												<option>Equipement</option>
+												<option>Autres</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6 form-group">
+										<label>description *</label>
+										<textarea id="updesc" name="desc" class="form-control"></textarea>
+									</div>
+									<div class="col-md-12 form-group">
+										<label>Price *</label>
+										<input id="upprice" name="price" type="text" style="border:1px solid #ccc;" class="form-control" />
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Phone Number*</label>
+										<input id="upphone" name="phone" type="text" style="border:1px solid #ccc;" class="form-control" placeholder="must contain 8 numbers" />
+									</div>
+
+									<div class="col-md-6 form-group">
+										<input type="file" id="upfiles" name="files[]" multiple />
+									</div>
+
+									<div class="loader" id="submitLoader" style="width: 25px;margin: 15px auto;height: 13px;display: none;">
+										<div>
+											<div style="animation: rotate .75s 0s linear infinite;border:2px solid #E2B13C ;-webkit-animation: rotate .75s 0s linear infinite;"></div>
+										</div>
+									</div>
+									<div>
+										<div id="msg" style="width: 75%;display:none;margin:0 auto 5px auto">Product Added Successfully</div>
+									</div>
+
+								</div>
+
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<input id="update" type="button" class="btn btn-success btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
+								 value="Update" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
 		</main>
 
 		<!-- Footer Section -->
-		<footer class="footer-main container-fluid no-padding footer-section2">
+		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+
+			Developed By: Dream Team
+			<p>Copyright &copy 2018</p>
 
 		</footer><!-- Footer Section /- -->
 
@@ -231,6 +308,10 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
+	<script src="js/scripts.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+	<script src="js/Shop/homeshop.js"></script>
+
 
 </body>
 
