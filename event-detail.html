@@ -45,6 +45,8 @@
 	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
 	<link rel="stylesheet" type="text/css" href="css/shortcode.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="css/event/eventdetail.css">
+
 
 	<!--[if lt IE 9]>
 		<script src="js/html5/respond.min.js"></script>
@@ -147,26 +149,46 @@
 						<!-- Tour List -->
 						<div class="col-md-6 col-sm-12 col-xs-6 tour-list">
 							<div class="tour-content">
-								<div class="col-md-5 col-sm-5 col-xs-12 no-padding">
-									<img src="images/tour-list1.jpg" alt="Tour Place" />
-								</div>
+
+								<!-- Features Section -->
+								<div id="features-section" class="container-fluid no-left-padding no-right-padding features-section">
+									<!-- Container -->
+									<div class="container">
+
+										<!-- Row -->
+										<div class="row">
+											<!-- Carousel -->
+											<div id="slider" class="features-carousel">
+
+											</div><!-- Carousel /- -->
+										</div><!-- Row /- -->
+									</div><!-- Container /- -->
+								</div><!-- Features Section /- -->
+
 								<div class="col-md-7 col-sm-7 col-xs-12 no-left-padding no-right-padding tour-detail">
-									<h3><span>Europe Travel</span> With Me</h3>
+									<h3><span id="eventTitle"></span></h3>
 									<div class="tour-time">
-										<span><i class="fa fa-map-marker" style="color: red;"></i> 13 Times</span>
-										<span><i class="fa fa-map-marker" style="color: green;"></i> 23 Activities</span>
+										<span id="depart"></span>
+										<span id="destination"></span>
+										<div id="map" style="height:350px;">
+
+										</div>
+										<div id="directions-panel"></div>
+
 									</div>
-									<p>That this group would somehow form a family that's the way we all became the Brady Bunch. </p>
+
+
+									<p id="eventDesc"></p>
 									<div class="tour-rate">
 										<div class="pull-left">
-											<h5><i class="fa fa-money" style="color:green;"></i><span>40 Dt</span></h5><br>
-											<h5><i class="fa fa-phone" style="color: green;"></i><span>53313557</span></h5>
+											<h5><i class="fa fa-money" style="color:green;"></i><span id="price">40 Dt</span></h5><br>
+											<h5><i class="fa fa-phone" style="color: green;"></i><span id="phone">53313557</span></h5>
 
 
 										</div>
 										<div class="pull-right">
-											<h5><i class="fa fa-list-ol" style="color:dimgrey;"></i><span>40 places </span></h5><br>
-											<h5><i class="fa fa-calendar" style="color:black;"></i><span>27-10-2018</span></h5>
+											<h5><i class="fa fa-list-ol" style="color:dimgrey;"></i><span id="places">40 places </span></h5><br>
+											<h5><i class="fa fa-calendar" style="color:black;"></i><span id="date">27-10-2018</span></h5>
 
 										</div>
 
@@ -176,7 +198,7 @@
 
 									<div class="tour-rate">
 										<br>
-										<button class="btn btn-success" onclick="participate(this);">Participate</button>
+										<button id="submitBtn">Participate</button>
 									</div>
 								</div>
 							</div>
@@ -214,6 +236,15 @@
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
 	<script src="js/Event/eventdetail.js"></script>
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDX3PjWa_di2XJLaGTHZSKJLm_n2QIWG_w&callback=getEventDetail">
+
+	</script>
+
+	<script>
+
+	</script>
+
 
 
 </body>

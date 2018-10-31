@@ -1,0 +1,16 @@
+.features-carousel.owl-theme .owl-controls {
+    margin-top: 15px;
+}
+
+#features-section {
+    padding-top: 0px;
+    padding-bottom: 15px;
+}
+
+#directions-panel {
+    margin-top: 10px;
+    background-color: #FFEE77;
+    font-size: 12px;
+    letter-spacing: 0.72px;
+    line-height: 22px;
+}

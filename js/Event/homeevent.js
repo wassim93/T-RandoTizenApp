@@ -54,7 +54,8 @@ function showSlider(res) {
         var htext = document.createElement("h4");
         htext.innerHTML = res[i]["title"];
         var a = document.createElement("a");
-        a.setAttribute("href", "images/feature-img1.jpg");
+        a.setAttribute("id", res[i]["id"]);
+        a.setAttribute("onclick", "showEventDetail(this.id);");
         var i1 = document.createElement("i");
         i1.setAttribute("class", "fa fa-search");
         a.appendChild(i1);
@@ -101,8 +102,8 @@ function showOneEvent(res) {
     image.setAttribute("style", "height:270px;width:270px;");
     var htext = document.createElement("h4");
     htext.innerHTML = res[0]["title"];
-    var a = document.createElement("a");
-    a.setAttribute("href", "images/feature-img1.jpg");
+    a.setAttribute("id", res[i]["id"]);
+    a.setAttribute("onclick", "showEventDetail(this.id);");
     var i1 = document.createElement("i");
     i1.setAttribute("class", "fa fa-search");
     a.appendChild(i1);
@@ -137,25 +138,6 @@ function loadEvents() {
 
 function appendAllEventsData(res) {
     var eventlist = document.getElementById("eventlist");
-
-    /* <!-- Destination Box -->
-                 <div  class="col-md-4 col-sm-6 col-xs-6 destination-box">
-                     <div class="destination-content">
-                         <img src="images/destination-1.jpg" alt="Destination" />
-                         <h3><span>kathmandu</span></h3>
-                         <div class="destination-content-box">
-                             <h4>Nepal Travel<br> With Me </h4>
-                             <h2>1999 DT <span>Per Person</span></h2>
-                             <ul>
-                                 <li><a href="#"><i class="fa fa-refresh"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-info"></i></a></li>
-                                 <li><a href="#"><i class="fa fa-trash"></i></a></li>
-                             </ul>
-                         </div>
-                     </div>
-                 </div><!-- Destination Box /- -->
- 
- */
     for (var i = 0; i < res.length; i++) {
         var destinationBox = document.createElement("div");
         destinationBox.setAttribute("class", "col-md-4 col-sm-6 col-xs-6 destination-box");
@@ -180,6 +162,7 @@ function appendAllEventsData(res) {
         h2text.appendChild(span1);
         var ul = document.createElement("ul");
         var li1 = document.createElement("li");
+        li1.setAttribute("class", "updatebtn");
         var a1 = document.createElement("a");
         a1.setAttribute("href", "#");
         var i1 = document.createElement("i");
@@ -189,19 +172,22 @@ function appendAllEventsData(res) {
 
         var li2 = document.createElement("li");
         var a2 = document.createElement("a");
-        a2.setAttribute("href", "#");
+        a2.setAttribute("id", res[i]["id"]);
+        a2.setAttribute("onclick", "showEventDetail(this.id);");
         var i2 = document.createElement("i");
         i2.setAttribute("class", "fa fa-info");
         a2.appendChild(i2);
         li2.appendChild(a2);
 
         var li3 = document.createElement("li");
+        li3.setAttribute("class", "deletebtn");
         var a3 = document.createElement("a");
         a3.setAttribute("href", "#");
         var i3 = document.createElement("i");
         i3.setAttribute("class", "fa fa-trash");
         a3.appendChild(i3);
         li3.appendChild(a3);
+
 
         ul.appendChild(li1);
         ul.appendChild(li2);
@@ -221,8 +207,60 @@ function appendAllEventsData(res) {
         destinationBox.appendChild(destinationContent);
         eventlist.appendChild(destinationBox);
 
+        checkUserEvent(res[i]["id"]);
 
     }
+
+}
+
+function checkUserEvent(idevent) {
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:8000/checkeventuser";
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var jsonData = JSON.parse(xhr.responseText);
+
+
+            if (jsonData["response"] == "false") {
+                $(".deletebtn").attr("style", "display:none;");
+                $(".updatebtn").attr("style", "display:none;");
+
+            }
+
+
+        }
+    };
+    var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": idevent });
+    xhr.send(data);
+}
+
+function showEventDetail(eventid) {
+
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:8000/GetEventById/" + eventid;
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.stringify(xhr.responseText);
+            if (response.length != 0) {
+                localStorage.setItem("selectedEvent", JSON.parse(response));
+
+                window.location.href = "event-detail.html";
+            } else {
+                // no result
+                //$("#NoResult").attr("style", "display:block;");
+                //$("#Results").attr("style", "display:none;");
+            }
+            loadEvents();
+
+        } else {
+            console.log("err" + response);
+        }
+    };
+    xhr.send();
+
+
 
 }
 
