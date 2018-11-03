@@ -137,6 +137,10 @@
 				</div>
 			</div><!-- Page Header /- -->
 
+
+			<!--no result view-->
+
+
 			<!-- Features Section -->
 			<div id="features-section" class="container-fluid no-left-padding no-right-padding features-section" style="padding-top: 30px;padding-bottom: 0;">
 				<!-- Container -->
@@ -154,6 +158,7 @@
 
 
 						</div><!-- Carousel /- -->
+
 					</div><!-- Row /- -->
 				</div><!-- Container /- -->
 			</div><!-- Features Section /- -->
@@ -178,7 +183,40 @@
 
 
 			</div><!-- Row /- -->
+			<div id="NoResult" style="display:none;" class="container-fluid no-left-padding no-right-padding error-section">
+				<!-- Container -->
+				<div class="container">
+					<div class="row">
+						<div class="col-md-5 col-sm-12 col-xs-12">
+							<img src="images/404.jpg" alt="404" />
+						</div>
+						<div class="col-md-7 col-sm-12 col-xs-12 error-content">
+							<h6>oops! No Events found!</h6>
+							<a href="addevent.html" title="Add New Event">Add New Event</a>
+						</div>
+
+					</div>
+				</div><!-- Container /- -->
+			</div><!-- Error Section /- -->
 		</div><!-- Container /- -->
+
+		<!--DeleteModal -->
+		<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #d9534f;color:#fff;padding-left: 35%;">
+						Delete This Event
+					</div>
+					<div class="modal-body">
+						Are You Sure ?
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<button class="btn btn-danger btn-ok" onclick="deleteAction();" style="margin-top: 5px;margin-left: 0px;">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div><!-- Destination Section /- -->
 
 	</main>
@@ -204,6 +242,8 @@
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
 	<script src="js/Event/homeevent.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
 
 
 

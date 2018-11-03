@@ -1,4 +1,6 @@
+var selectedEvent;
 
+//get event this week 
 function getData() {
 
     var xhr = new XMLHttpRequest();
@@ -12,7 +14,7 @@ function getData() {
 
             } else {
                 // no result
-                //$("#NoResult").attr("style", "display:block;");
+                $("#features-section").attr("style", "display:none;");
                 //$("#Results").attr("style", "display:none;");
             }
             loadEvents();
@@ -23,6 +25,8 @@ function getData() {
     };
     xhr.send();
 }
+
+
 
 
 
@@ -44,8 +48,10 @@ function showSlider(res) {
     var slider = document.getElementById("slider");
 
     for (var i = 0; i < res.length; i++) {
+
         var featureBox = document.createElement("div");
         featureBox.setAttribute("class", "col-md-12 features-box");
+        featureBox.setAttribute("id", res[i]["id"]);
         var featureDetail = document.createElement("div");
         featureDetail.setAttribute("class", "features-detail");
         var image = document.createElement("img");
@@ -102,7 +108,8 @@ function showOneEvent(res) {
     image.setAttribute("style", "height:270px;width:270px;");
     var htext = document.createElement("h4");
     htext.innerHTML = res[0]["title"];
-    a.setAttribute("id", res[i]["id"]);
+    var a = document.createElement("a");
+    a.setAttribute("id", res[0]["id"]);
     a.setAttribute("onclick", "showEventDetail(this.id);");
     var i1 = document.createElement("i");
     i1.setAttribute("class", "fa fa-search");
@@ -114,6 +121,7 @@ function showOneEvent(res) {
     slider.appendChild(featureBox);
 }
 
+//get all events
 function loadEvents() {
     var xhr = new XMLHttpRequest();
     var url = "http://localhost:8000/GetAllEvent";
@@ -126,7 +134,7 @@ function loadEvents() {
 
             } else {
                 // no result
-                //$("#NoResult").attr("style", "display:block;");
+                $("#NoResult").attr("style", "display:block;padding:0;");
                 //$("#Results").attr("style", "display:none;");
             }
         } else {
@@ -141,6 +149,7 @@ function appendAllEventsData(res) {
     for (var i = 0; i < res.length; i++) {
         var destinationBox = document.createElement("div");
         destinationBox.setAttribute("class", "col-md-4 col-sm-6 col-xs-6 destination-box");
+        destinationBox.setAttribute("id", res[i]["id"]);
         var destinationContent = document.createElement("div");
         destinationContent.setAttribute("class", "destination-content");
         var image = document.createElement("img");
@@ -182,7 +191,8 @@ function appendAllEventsData(res) {
         var li3 = document.createElement("li");
         li3.setAttribute("class", "deletebtn");
         var a3 = document.createElement("a");
-        a3.setAttribute("href", "#");
+        a3.setAttribute("id", res[i]["id"]);
+        a3.setAttribute("onclick", "showDeleteModal(this.id);")
         var i3 = document.createElement("i");
         i3.setAttribute("class", "fa fa-trash");
         a3.appendChild(i3);
@@ -252,7 +262,7 @@ function showEventDetail(eventid) {
                 //$("#NoResult").attr("style", "display:block;");
                 //$("#Results").attr("style", "display:none;");
             }
-            loadEvents();
+            //loadEvents();
 
         } else {
             console.log("err" + response);
@@ -262,6 +272,85 @@ function showEventDetail(eventid) {
 
 
 
+}
+
+
+function showDeleteModal(id) {
+    $("#confirm-delete").modal("show");
+    selectedEvent = id;
+}
+
+function deleteAction() {
+    // delete div from list withoout refreshing
+
+
+    $("div[id=" + selectedEvent + "]").remove();
+
+    hideModal();
+    // count div children number if equal zero show no result found
+    if ($("#eventlist > div").length == 0) {
+        // no result
+        $("#NoResult").attr("style", "display:block;padding:0;");
+    }
+
+    //empty the  slider to reload new data 
+    var myNode = document.getElementById("slider");
+
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    // inisialize carousel 
+    $('.owl-carousel').trigger('destroy.owl.carousel');
+    var url = "http://localhost:8000/deleteEvent/" + selectedEvent;
+    // Delete a product
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.onload = function () {
+        if (xhr.readyState == 4 && xhr.status == "200") {
+            var xhr1 = new XMLHttpRequest();
+            // gt this week events not all events
+            var url = "http://localhost:8000/GetAllEvent";
+            xhr1.open("GET", url, true);
+            xhr1.onreadystatechange = function () {
+                if (xhr1.readyState === 4 && xhr1.status === 200) {
+                    var response = JSON.parse(xhr1.responseText);
+                    if (response.length != 0) {
+                        appendData(response);
+                    } else {
+                        // no result
+                        $("#features-section").attr("style", "display:none;");
+                        //$("#Results").attr("style", "display:none;");
+                    }
+
+                } else {
+                    console.log("err" + response);
+                }
+            };
+            xhr1.send();
+            //console.log(response.length);
+
+        } else {
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send();
+}
+
+// count li number in ul products
+function countLiData() {
+    var ul = document.getElementById("products");
+    var liNodes = [];
+
+    for (var i = 0; i < ul.childNodes.length; i++) {
+        if (ul.childNodes[i].nodeName == "LI") {
+            liNodes.push(ul.childNodes[i]);
+        }
+    }
+    return liNodes.length;
+}
+
+function hideModal() {
+    $("#confirm-delete").modal("hide");
 }
 
 
