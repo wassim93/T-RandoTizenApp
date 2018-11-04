@@ -34,7 +34,7 @@ var loadData = () => {
 							</div>
 							<div class="entry-content">
 								<p>So this is the tale of our castaways they're here for a long long time. </p>
-								<a href="#" title="read more">read more</a>
+								<a href="#" title="read more" onclick="ShowDetail(${x.id},event)">read more</a>
 							</div>
 
 						</div>
@@ -74,4 +74,10 @@ var checkLike = (idpost, token) => {
 
     })
 
+}
+
+var  ShowDetail = (id,event)=>{
+event.preventDefault()
+localStorage.setItem("idpostdetail",id)
+window.location = "blog-single.html"
 }
