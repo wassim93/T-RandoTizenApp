@@ -27,6 +27,7 @@ function appendData(response) {
   for (var i = 0; i <= response.length; i++) {
     var li = document.createElement("li");
     li.setAttribute("id", response[i]["id"]);
+    li.setAttribute("name", response[i]["titre"]);
     li.setAttribute("class", "product");
     checkUserProduct(response[i]["id"]);
     var a = document.createElement("a");
@@ -80,20 +81,21 @@ function appendData(response) {
   }
 }
 
-function search() {
-  var input, filter, ul, li, a, i;
-  input = document.getElementById("searchInput");
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("products");
-  li = ul.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
+function search(_this) {
+
+
+
+
+  var value = $(_this).val().toLowerCase();
+  console.log(value);
+  $("#products li *").filter(function () {
+    console.log($(this));
+    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //$(this).toggle($(this).contents().find('img').css({ 'display': 'block' }));
+  });
+
+
+
 }
 
 function checkUserProduct(idprod) {
@@ -237,6 +239,7 @@ function updateProduct() {
   var xhr = new XMLHttpRequest();
   var url = "http://localhost:8000/updateProduct";
   xhr.open("POST", url, true);
+  xhr.setRequestHeader('Content-Type', 'application/json')
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       $("#submitLoader").css("display", "none");
@@ -246,9 +249,8 @@ function updateProduct() {
       );
     }
   };
-  var data = JSON.stringify({ "id": selectedProduct, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "images": imgSrcs, "contact": $("#upphone").val(), "date": new Date() });
-  console.log(JSON.parse(data));
-  xhr.send(JSON.parse(data));
+  var data = JSON.stringify({ id: selectedProduct, token: "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", title: $("#uptitle").val(), type: $("#uptype").val(), description: $("#updesc").val(), prix: $("#upprice").val(), images: imgSrcs, contact: $("#upphone").val(), date: new Date() });
+  xhr.send(data);
 }
 
 function hideUpdateModal() {

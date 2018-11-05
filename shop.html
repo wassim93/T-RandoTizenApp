@@ -98,8 +98,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
-									 aria-expanded="false">EVENTS</a>
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
@@ -168,7 +167,7 @@
 							<h3 class="widget-title">search</h3>
 							<div class="search-block">
 								<div class="input-group">
-									<input id="searchInput" type="text" class="form-control" onkeyup="search();" placeholder="Type And Hit Enter">
+									<input id="searchInput" type="text" class="form-control" onkeyup="search(this);" placeholder="Type And Hit Enter">
 									<span class="input-group-btn">
 										<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
 									</span>
@@ -226,7 +225,7 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header" style="background-color: #449d44;color:#fff;padding-left: 35%;">
-							update Product
+							Update Product
 						</div>
 						<form method="POST" action="#" onsubmit="updateProduct();">
 							<div class="modal-body">
@@ -270,7 +269,7 @@
 										</div>
 									</div>
 									<div>
-										<div id="msg" style="width: 75%;display:none;margin:0 auto 5px auto">Product Added Successfully</div>
+										<div id="msg" style="width: 75%;display:none;margin:0 auto 5px auto">Product Updated Successfully</div>
 									</div>
 
 								</div>

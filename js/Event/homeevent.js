@@ -5,7 +5,7 @@ var imgSrcs = [];
 function getData() {
 
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/GetAllEvent";
+    var url = "http://localhost:8000/geteventofthisweek";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -308,7 +308,7 @@ function deleteAction() {
         if (xhr.readyState == 4 && xhr.status == "200") {
             var xhr1 = new XMLHttpRequest();
             // gt this week events not all events
-            var url = "http://localhost:8000/GetAllEvent";
+            var url = "http://localhost:8000/geteventofthisweek";
             xhr1.open("GET", url, true);
             xhr1.onreadystatechange = function () {
                 if (xhr1.readyState === 4 && xhr1.status === 200) {
@@ -375,25 +375,34 @@ function showUpdateModal(res) {
 
 }
 
-function updateClick() {
-    var isValid = true;
-    verifTextarea();
-    verifInputsWithoutFiles();
 
-    if (isValid == false)
-        e.preventDefault();
-    else
-        if ($("#upphone").val().length == 8) {
-            //SaveProduct();
-            updateEvent();
 
-        } else {
-            alert("error");
-            $("#upphone").css({
-                "border": "1px solid red",
-                "background": "#FFCECE"
-            })
-        }
+
+// validate form when update clicked before sending request
+
+$(document).ready(function () {
+
+    $('#updateEvent').click(function (e) {
+        var isValid = true;
+        verifTextarea();
+        verifInputsWithoutFiles();
+
+        if (isValid == false)
+            e.preventDefault();
+        else
+            if ($("#upphone").val().length == 8) {
+                //SaveProduct();
+                updateEvent();
+
+            } else {
+                alert("error");
+                $("#upphone").css({
+                    "border": "1px solid red",
+                    "background": "#FFCECE"
+                })
+            }
+    });
+    $("#files").val("");
 
     if (window.File && window.FileList && window.FileReader) {
         $("#upfiles").on("change", function (e) {
@@ -417,7 +426,8 @@ function updateClick() {
             }
         });
     } else { alert("Your browser doesn't support to File API") }
-}
+});
+
 
 function updateEvent() {
 
@@ -426,6 +436,7 @@ function updateEvent() {
     var xhr = new XMLHttpRequest();
     var url = "http://localhost:8000/updateEvent";
     xhr.open("POST", url, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             $("#submitLoader").css("display", "none");
@@ -435,10 +446,9 @@ function updateEvent() {
             );
         }
     };
-    var data = JSON.stringify({ "id": "" + selectedEvent, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "image": imgSrcs, "contact": $("#upphone").val(), "date": $("#update").val(), "pointDepart": $("#updepart").val(), "pointArrive": $("#updestination").val(), "niveau": "", "nbrPlace": $("#upnbplace").val() });
-    console.log("id" + selectedEvent);
-    console.log(JSON.parse(data));
-    xhr.send(JSON.parse(data));
+    console.log(imgSrcs);
+    var data = JSON.stringify({ "id": selectedEvent, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "image": imgSrcs, "contact": $("#upphone").val(), "date": $("#update").val(), "pointDepart": $("#updepart").val(), "pointArrive": $("#updestination").val(), "niveau": "", "nbrPlace": $("#upnbplace").val() });
+    xhr.send(data);
 
 }
 
