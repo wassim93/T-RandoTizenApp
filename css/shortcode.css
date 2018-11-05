@@ -3074,7 +3074,10 @@
 	text-transform: capitalize;
 	margin-top: 5px;
 }
+.comment-box{
 
+	margin-bottom: 10px;
+}
 .post-comments-detail .mis-content-block>div>a:hover, .post-comments-detail .mis-content-block>div>span a {
 	color: #232323;
 }
