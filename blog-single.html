@@ -42,11 +42,11 @@
 	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
 	<link rel="stylesheet" type="text/css" href="css/shortcode.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	
+	<link href="css/fontawesome-all.css" rel="stylesheet" />
 	<!--[if lt IE 9]>
 		<script src="js/html5/respond.min.js"></script>
     <![endif]-->
-	
+
 </head>
 
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation" onload="loadData()">
@@ -179,49 +179,35 @@
 						<!-- Type Post -->
 						<article class="type-post">
 							<div class="entry-cover">
-								<a href="#"><img src="images/blog1.jpg" alt="Blog" /></a>
-								<h3 class="entry-title"><a href="#" title="It has survived not only five centuries in The travelling">It has survived not only five centuries in The travelling</a></h3>
-								<div class="post-date"><a href="#"><b>23</b>feb</a></div>
+						       <div id="imagePost"> 
+
+							   </div>
+								
 							</div>
 							<div class="entry-meta">
 								<div class="post-like">
-									<a href="#"><i class="fa fa-heart-o"></i> 25 Likes</a>
+									<a href="#"  onclick="HitLike(event)"><i id="likeicon" class="fa fa-heart"></i><span id="likes"></span></a>
 								</div>
 								<div class="post-comment">
-									<a href="#"><i class="fa fa-comment-o"></i> 35 Comments</a>
+									<a href="#"><i class="fa fa-comment"></i> <span id="nbrcomments"></span></a>
 								</div>
+								<br>
 								<div class="byline">
-									By <a href="#">Admin</a>
+									<div id="profileimg"></div>
+ 									By <a href="#">Admin</a>
 								</div>
 							</div>
 							<div class="entry-content">
-								<p>So this is the tale of our castaways they're here for a long long time. They'll have to make the best of things its an uphill climb. Come and listen to a story about a man named Jed - a poor mountaineer barely kept his family fed. So this is the tale of our castaways they're here for a long long time. Today still wanted by the government they survive as soldiers of fortune. That this group would somehow form a family that's the way we all became the Brady Bunch? These Happy Days are yours and mine Happy Days.</p>
-								<blockquote>
-									<p>We might as well say Would you be mine? Could you be mine? Won't you be my neighbor. Their house is a museum where people come to see ‘em. They really are a scream the Addams Family.</p>
-								</blockquote>
-								<p>Today still wanted by the government they survive as soldiers of fortune. That this group would somehow form a family that's the way we all became the Brady Bunch? These Happy Days are yours and mine Happy Days. No phone no lights no motor car not a single luxury. Like Robinson Crusoe it's primitive as can be. These Happy Days are yours and mine Happy Days. Why do we always come here? I guess well never know. Its like a kind of torture to have to watch the show.</p>
+							 <div id="content"></div>
+							 <br>
+							 <div class="post-date" align="right" style="font-size:10px;color:rgb(119, 117, 117)"><span id="date"></span></div>
 							</div>
-							<div class="entry-footer">
-								<div class="tags">
-									<i class="icon icon-Tag"></i>
-									<a href="#" title="Hiking">Hiking</a>
-									<a href="#" title="Sailing">Sailing</a>
-									<a href="#" title="Travelling">Travelling</a>
-								</div>
-								<ul class="social">
-									<li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-									<li><a href="#" title="Tumblr"><i class="fa fa-tumblr"></i></a></li>
-									<li><a href="#" title="Vimeo"><i class="fa fa-vimeo"></i></a></li>
-									<li><a href="#" title="Pinterest"><i class="fa fa-pinterest-p"></i></a></li>
-								</ul>
-							</div>
+							
 						</article><!-- Type Post /- -->
 						
 						<!-- Comments -->
 						<div class="post-comments">
-							<h3>5 comments</h3>
+						
 							<div class="post-comments-detail">
 							
 								
@@ -256,6 +242,27 @@
 	
 			
 	</div>
+	<!--update comment-->
+	<div class="modal fade" id="update-comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
+					Edit comment 
+				</div>
+				
+                <div class="modal-body">
+
+                  <input type="text" name="comment" id="commentToEdit">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<input id="update" type="button"onclick="UpdateComment()" class="btn btn-warning btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
+					 value="Update" />
+				</div>
+			</div>
+		</div>
+
+    </div>
 	<!----->
 	<script src="js/blog/blogSingle.js"></script>
 	<!-- JQuery v1.12.4 -->
@@ -266,7 +273,7 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
-	
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
 </body>
 
 <!-- Mirrored from premiumlayers.net/demo/html/hiking/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:57 GMT -->
