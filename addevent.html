@@ -263,7 +263,17 @@
                     e.preventDefault();
                 else
                     if ($("#phone").val().length == 8) {
-                        SaveEvent();
+                        if (($("#files").val() == "")) {
+                            alert("error");
+                            $("#files").css({
+                                "border": "1px solid red",
+                                "background": "#FFCECE"
+                            })
+
+                        } else {
+                            SaveEvent();
+
+                        }
 
                     } else {
                         alert("error");

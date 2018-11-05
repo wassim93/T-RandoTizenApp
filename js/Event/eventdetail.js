@@ -1,6 +1,7 @@
 var retrievedObject;
+retrievedObject = JSON.parse(localStorage.getItem("selectedEvent"));
+
 function getEventDetail() {
-    retrievedObject = JSON.parse(localStorage.getItem("selectedEvent"));
     $("#eventTitle").html(retrievedObject["title"]);
     $("#depart").html('<i class="fa fa-map-marker" style="color: red;"></i>' + retrievedObject["point_depart"]);
     $("#destination").html('<i class="fa fa-map-marker" style="color: green;"></i>' + retrievedObject["point_arrive"]);
@@ -20,6 +21,7 @@ function getEventDetail() {
 
     initMap();
     checkparticipate();
+    LoadParticipant();
 }
 
 function showSlider(res) {
@@ -122,7 +124,9 @@ function participate() {
             if (res["response"] === "participer") {
                 btn.setAttribute("class", "btn btn-danger");
                 btn.innerHTML = "Cancel";
-                btn.setAttribute("onclick", "cancelParticipate();")
+                btn.setAttribute("onclick", "cancelParticipate();");
+                $("#participantDiv").attr("style", "display:block;");
+                LoadParticipant();
             }
 
 
@@ -162,12 +166,62 @@ function cancelParticipate() {
                 btn.setAttribute("class", "btn btn-success");
                 btn.innerHTML = "Participate";
                 btn.setAttribute("onclick", "participate();")
+                $("#" + retrievedObject["user"]["username"]).remove();
+                if ($("#participantDiv li").length >= 1) {
+                    LoadParticipant();
+
+                } else {
+                    $("#participantDiv").attr("style", "display:none;");
+
+                }
             }
 
         }
     };
     var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": retrievedObject["id"] });
     xhr.send(data);
+}
+
+function LoadParticipant() {
+
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:8000/GetEventParticipant/" + retrievedObject["id"];
+    xhr.open("GET", url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.length != 0) {
+                showParticipantList(response);
+
+            } else {
+                // no result
+                $("#participantDiv").attr("style", "display:none;");
+                //$("#Results").attr("style", "display:none;");
+            }
+
+        } else {
+            console.log("err" + response);
+        }
+    };
+    xhr.send();
+
+}
+
+function showParticipantList(res) {
+    console.log(retrievedObject);
+    var ul = document.getElementById("listPar");
+    for (var i = 0; i < res.length; i++) {
+        var li = document.createElement("li");
+        li.setAttribute("class", "col-md-6 no-padding");
+        li.setAttribute("id", res[i]["username"]);
+        var image = document.createElement("img");
+        image.setAttribute("class", "thumbnail");
+        image.setAttribute("style", "width: 60px;height: 60px;border-radius: 60px;");
+        image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["_profile_pic_url"]);
+        li.appendChild(image);
+        ul.appendChild(li);
+    }
+
 }
 
 

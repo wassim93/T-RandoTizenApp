@@ -97,8 +97,7 @@
 								<li><a href="blog.html" title="Blog">HOME</a></li>
 
 								<li>
-									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true"
-									 aria-expanded="false">EVENTS</a>
+									<a href="events.html" title="events" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
@@ -211,13 +210,13 @@
 			</div><!-- Checkout /- -->
 
 		</main>
-<!-- Footer Section -->
-<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+		<!-- Footer Section -->
+		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
-		Developed By: Dream Team
-		<p>Copyright &copy 2018</p>
+			Developed By: Dream Team
+			<p>Copyright &copy 2018</p>
 
-	</footer><!-- Footer Section /- -->
+		</footer><!-- Footer Section /- -->
 	</div>
 
 	<!-- JQuery v1.12.4 -->
@@ -247,7 +246,17 @@
 					e.preventDefault();
 				else
 					if ($("#phone").val().length == 8) {
-						SaveProduct();
+						if (($("#files").val() == "")) {
+							alert("error");
+							$("#files").css({
+								"border": "1px solid red",
+								"background": "#FFCECE"
+							})
+
+						} else {
+							SaveProduct();
+
+						}
 
 					} else {
 						alert("error");
