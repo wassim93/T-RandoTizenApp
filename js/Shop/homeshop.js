@@ -235,7 +235,7 @@ function updateProduct() {
   //loader show 
   $("#submitLoader").css("display", "block");
   var xhr = new XMLHttpRequest();
-  var url = "http://localhost:8000/updateProduct/71";
+  var url = "http://localhost:8000/updateProduct";
   xhr.open("POST", url, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -246,7 +246,7 @@ function updateProduct() {
       );
     }
   };
-  var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "images": imgSrcs, "contact": $("#upphone").val(), "date": new Date() });
+  var data = JSON.stringify({ "id": selectedProduct, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "images": imgSrcs, "contact": $("#upphone").val(), "date": new Date() });
   console.log(JSON.parse(data));
   xhr.send(JSON.parse(data));
 }

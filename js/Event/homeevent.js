@@ -1,4 +1,5 @@
 var selectedEvent;
+var imgSrcs = [];
 
 //get event this week 
 function getData() {
@@ -173,7 +174,8 @@ function appendAllEventsData(res) {
         var li1 = document.createElement("li");
         li1.setAttribute("class", "updatebtn");
         var a1 = document.createElement("a");
-        a1.setAttribute("href", "#");
+        a1.setAttribute("id", JSON.stringify(res[i]));
+        a1.setAttribute("onclick", "showUpdateModal(this.id);")
         var i1 = document.createElement("i");
         i1.setAttribute("class", "fa fa-refresh");
         a1.appendChild(i1);
@@ -202,9 +204,6 @@ function appendAllEventsData(res) {
         ul.appendChild(li1);
         ul.appendChild(li2);
         ul.appendChild(li3);
-
-
-
 
         destinationContentBox.appendChild(h1text);
         destinationContentBox.appendChild(h2text);
@@ -352,5 +351,120 @@ function countLiData() {
 function hideModal() {
     $("#confirm-delete").modal("hide");
 }
+
+
+
+function showUpdateModal(res) {
+    $("#update-event").modal("show");
+    initAutocomplete();
+
+    res = JSON.parse(res);
+    $("#uptitle").val(res["title"]);
+    $("#update").val(res["date"]);
+
+    $("#uptype").val(res["type"]);
+    $("#updesc").val(res["description"]);
+    $("#upprice").val(res["prix"]);
+    $("#upphone").val(res["contact"]);
+    $("#updepart").val(res["point_depart"]);
+    $("#updestination").val(res["point_arrive"]);
+    $("#upnbplace").val(res["_nbr_places"]);
+
+    selectedEvent = res["id"];
+
+
+}
+
+function updateClick() {
+    var isValid = true;
+    verifTextarea();
+    verifInputsWithoutFiles();
+
+    if (isValid == false)
+        e.preventDefault();
+    else
+        if ($("#upphone").val().length == 8) {
+            //SaveProduct();
+            updateEvent();
+
+        } else {
+            alert("error");
+            $("#upphone").css({
+                "border": "1px solid red",
+                "background": "#FFCECE"
+            })
+        }
+
+    if (window.File && window.FileList && window.FileReader) {
+        $("#upfiles").on("change", function (e) {
+            var files = e.target.files,
+                filesLength = files.length;
+            for (var i = 0; i < filesLength; i++) {
+                var f = files[i]
+                var fileReader = new FileReader();
+                fileReader.filename = files[i].name.split('.')[0];
+                fileReader.onload = (function (e) {
+                    var file = e.target;
+
+                    // fill image array with 64 base images 
+                    //filter image base 64 from prefixes data:image/....
+                    var strImage = e.target.result.replace(/^data:image\/[a-z]+;base64,/, "");
+                    imgSrcs.push(JSON.parse(JSON.stringify({ "image": strImage })));
+
+                });
+
+                fileReader.readAsDataURL(f);
+            }
+        });
+    } else { alert("Your browser doesn't support to File API") }
+}
+
+function updateEvent() {
+
+    //loader show 
+    $("#submitLoader").css("display", "block");
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:8000/updateEvent";
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            $("#submitLoader").css("display", "none");
+            $("#msg").css("display", "block");
+            $('#msg').fadeIn();
+            $('#msg').fadeOut(2000, function () { window.location.href = "events.html"; }
+            );
+        }
+    };
+    var data = JSON.stringify({ "id": "" + selectedEvent, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "image": imgSrcs, "contact": $("#upphone").val(), "date": $("#update").val(), "pointDepart": $("#updepart").val(), "pointArrive": $("#updestination").val(), "niveau": "", "nbrPlace": $("#upnbplace").val() });
+    console.log("id" + selectedEvent);
+    console.log(JSON.parse(data));
+    xhr.send(JSON.parse(data));
+
+}
+
+function initAutocomplete() {
+
+    var depart = document.getElementById('updepart');
+    var destination = document.getElementById('updestination');
+    depart.value = "";
+    destination.value = "";
+    var autocomplete = new google.maps.places.Autocomplete(depart);
+    var autocomplete2 = new google.maps.places.Autocomplete(destination);
+    autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+            alert("No details available for input: '" + place.name + "'");
+            return;
+        }
+    });
+    autocomplete2.addListener('place_changed', function () {
+        var place = autocomplete2.getPlace();
+        if (!place.geometry) {
+            alert("No details available for input: '" + place.name + "'");
+            return;
+        }
+    });
+}
+
 
 
