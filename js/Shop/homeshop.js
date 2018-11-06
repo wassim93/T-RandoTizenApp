@@ -86,13 +86,23 @@ function search(_this) {
 
 
 
-  var value = $(_this).val().toLowerCase();
-  console.log(value);
-  $("#products li *").filter(function () {
-    console.log($(this));
-    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    //$(this).toggle($(this).contents().find('img').css({ 'display': 'block' }));
+  // Retrieve the input field text and reset the count to zero
+  var filter = $(_this).val();
+
+  // Loop through the comment list
+  $("#prodlist ul li").each(function () {
+
+
+    // If the list item does not contain the text phrase fade it out
+    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+      $(this).fadeOut();
+
+      // Show the list item if the phrase matches and increase the count by 1
+    } else {
+      $(this).show();
+    }
   });
+
 
 
 
