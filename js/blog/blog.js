@@ -1,33 +1,32 @@
-  
-var loadData = () => {
-    var LikedButtonColor = " "
-    var upsuppbutt = "hidden"
-    var xhr = new XMLHttpRequest()
-    xhr.open('GET', 'http://localhost:8000/getAllPosts', false)
+  var loadData = () => {
+      var LikedButtonColor = " "
+      var upsuppbutt = "hidden"
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'http://localhost:8000/getAllPosts', false)
 
-    xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-        
-            
-            JSON.parse(xhr.responseText).map(async x => {
-             
-              var ServerResp = await checkLike(x.id, localStorage.getItem("access_token"))
-              if(JSON.parse(ServerResp).response === "true"){
+      xhr.onreadystatechange = () => {
+          if (xhr.readyState === 4) {
 
-                 LikedButtonColor = "red"
-              }
-              var checku = await checkUser(x.id, localStorage.getItem("access_token"))
-              if(JSON.parse(checku).response==="true"){
-                       upsuppbutt = "visible"
-                    
-              }
 
-                $('#myList').append(
-                    `<div class="type-post">
+              JSON.parse(xhr.responseText).map(async x => {
+
+                  var ServerResp = await checkLike(x.id, localStorage.getItem("access_token"))
+                  if (JSON.parse(ServerResp).response === "true") {
+
+                      LikedButtonColor = "red"
+                  }
+                  var checku = await checkUser(x.id, localStorage.getItem("access_token"))
+                  if (JSON.parse(checku).response === "true") {
+                      upsuppbutt = "visible"
+
+                  }
+
+                  $('#myList').append(
+                      `<div class="type-post">
                             <div style="visbility:${upsuppbutt}" align="right">
                             <i class="fas fa-cog"  onclick="edit(${x.id},event)">
                             </i>
-                            <i class="fas fa-trash"  onclick="supprimer(${x.id})">
+                            <i class="fas fa-trash"  onclick="OpenConfirmDeleteDialg(${x.id})">
                             </i> 
                             </div>
 							<div class="entry-cover">
@@ -52,93 +51,99 @@ var loadData = () => {
 						</div>
                 
                 `)
-                LikedButtonColor = " "
-            })
+                  LikedButtonColor = " "
+              })
 
-        }
+          }
 
-    }
-    xhr.send()
-}
-var checkLike = (idpost, token) => {
-    return new Promise((resolve, reject) => {
+      }
+      xhr.send()
+  }
+  var checkLike = (idpost, token) => {
+      return new Promise((resolve, reject) => {
 
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost:8000/checkliked', true)
+          var xhr = new XMLHttpRequest()
+          xhr.open('POST', 'http://localhost:8000/checkliked', true)
 
-        xhr.onload = () => {
-            if (xhr.readyState === 4) {
-                resolve(xhr.responseText)
+          xhr.onload = () => {
+              if (xhr.readyState === 4) {
+                  resolve(xhr.responseText)
 
-            }
-        }
-        xhr.onerror = function () {
-            reject({
-                status: this.status,
-                statusText: xhr.statusText
-            });
-        };
-        xhr.send(JSON.stringify({
-            idpost: idpost,
-            token: token
-        }))
-
-
-    })
-
-}
-var checkUser = (idpost, token) => {
-    return new Promise((resolve, reject) => {
-
-        var xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost:8000/checkPostuser', true)
-
-        xhr.onload = () => {
-            if (xhr.readyState === 4) {
-                resolve(xhr.responseText)
-
-            }
-        }
-        xhr.onerror = function () {
-            reject({
-                status: this.status,
-                statusText: xhr.statusText
-            });
-        };
-        xhr.send(JSON.stringify({
-            idpost: idpost,
-            token: token
-        }))
+              }
+          }
+          xhr.onerror = function () {
+              reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+              });
+          };
+          xhr.send(JSON.stringify({
+              idpost: idpost,
+              token: token
+          }))
 
 
-    })
+      })
 
-}
-var  ShowDetail = (id,event)=>{
-event.preventDefault()
-localStorage.setItem("idpostdetail",id)
-window.location = "blog-single.html"
-}
-var edit = (id,event)=>{
-    event.preventDefault()
-    localStorage.setItem("idpostdetail",id)
-    window.location = "EditPost.html"
+  }
+  var checkUser = (idpost, token) => {
+      return new Promise((resolve, reject) => {
+
+          var xhr = new XMLHttpRequest()
+          xhr.open('POST', 'http://localhost:8000/checkPostuser', true)
+
+          xhr.onload = () => {
+              if (xhr.readyState === 4) {
+                  resolve(xhr.responseText)
+
+              }
+          }
+          xhr.onerror = function () {
+              reject({
+                  status: this.status,
+                  statusText: xhr.statusText
+              });
+          };
+          xhr.send(JSON.stringify({
+              idpost: idpost,
+              token: token
+          }))
 
 
-}
+      })
 
-var AddPost = ()=>{
-    window.location = "addPost.html"
-}
+  }
+  var ShowDetail = (id, event) => {
+      event.preventDefault()
+      localStorage.setItem("idpostdetail", id)
+      window.location = "blog-single.html"
+  }
+  var edit = (id, event) => {
+      event.preventDefault()
+      localStorage.setItem("idpostdetail", id)
+      window.location = "EditPost.html"
 
-var supprimer = (id)=>{
 
-    var xhr = new XMLHttpRequest()
-    xhr.open('GET', `http://localhost:8000/Removepost/${id}`, false)
+  }
 
-    xhr.onreadystatechange = () => {
-        window.location = "blog.html"
-    }
-    xhr.send()
+  var AddPost = () => {
+      window.location = "addPost.html"
+  }
 
-}
+  var supprimer = () => {
+      var id = localStorage.getItem("idpostdelete")
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', `http://localhost:8000/Removepost/${id}`, false)
+
+      xhr.onreadystatechange = () => {
+          window.location = "blog.html"
+      }
+      xhr.send()
+      localStorage.removeItem("idpostdelete")
+  }
+
+  var OpenConfirmDeleteDialg = (id) => {
+
+      $("#Delete-Post").modal("show")
+      localStorage.setItem("idpostdelete", id)
+  }
