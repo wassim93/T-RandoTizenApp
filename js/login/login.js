@@ -1,7 +1,7 @@
 var checkConnected = ()=>{
 
   if(localStorage.length >0 && localStorage.getItem("access_token") != ""){
-    window.location = "file:///home/aymen/workspace/AppCallee/blog.html";
+    window.location = "blog.html";
 
     }
 }
@@ -24,7 +24,7 @@ e.preventDefault()
     switch(xhr.status){
          case 201 :
          localStorage.setItem('access_token',getToken(username,password))
-         window.location = "file:///home/aymen/workspace/AppCallee/blog.html";
+         window.location = "blog.html";
 
          break; 
          case 204 :

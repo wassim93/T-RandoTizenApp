@@ -30,8 +30,8 @@ var register = (e) => {
                         message.innerHTML = "username or email already exist "
                         break;
                     case 200:
-                         message.innerHTML = `<a class="w3l-register-p" href="file:///home/aymen/workspace/AppCallee/index.html>Successfully registred  proceed to login</a>`;
-                         window.location = "file:///home/aymen/workspace/AppCallee/index.html"
+                         message.innerHTML = `<a class="w3l-register-p" href="index.html">Successfully registred  proceed to login</a>`;
+                         window.location = "index.html";
                     break; 
                 }
             }

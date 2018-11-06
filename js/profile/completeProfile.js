@@ -22,7 +22,7 @@ xhr.setRequestHeader('Content-Type', 'application/json')
 xhr.onreadystatechange = ()=>{
 console.log(xhr.responseText)
    if(xhr.status===201){
-   window.location = "file:///home/aymen/workspace/AppCallee/blog.html"
+   window.location = "blog.html"
    }else{
 
      document.getElementById("message").innerHTML = " error ocured please retry .. ! "

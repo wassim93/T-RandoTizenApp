@@ -7,7 +7,7 @@ var loadData = ()=>{
         console.log(JSON.parse(xhr.responseText)._fisrt_name)
     if(JSON.parse(xhr.responseText)._fisrt_name === "default"){
 
-             window.location = "file:///home/aymen/workspace/AppCallee/completeProfile.html"
+             window.location = "completeProfile.html"
 
     }
     
