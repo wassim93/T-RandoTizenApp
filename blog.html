@@ -55,13 +55,13 @@
 <body data-offset="200" data-spy="scroll" data-target=".ow-navigation" onload="loadData()">
 	<div class="main-container">
 		<!-- Loader -->
-		<!--div id="site-loader" class="load-complete">
+		<div id="site-loader" class="load-complete">
 			<div class="loader">
 				<div class="loader-inner ball-clip-rotate">
 					<div></div>
 				</div>
 			</div>
-		</div-->
+		</div>
 		<!-- Loader /- -->
 
 		<!-- Header Section -->
@@ -96,7 +96,7 @@
 						<div class="navbar-collapse collapse" id="navbar">
 							<hr style="margin-bottom: 0px;">
 							<ul class="nav navbar-nav" style="margin-top: 0px;">
-								<li><a href="blog.html" title="Blog">HOME</a></li>
+								<li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
 								<li><a href="profile.html" title="Blog">PROFILE</a></li>
 								<li>
 									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
@@ -104,15 +104,13 @@
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
-										<li><a href="myevents.html" title="My Events">My Events</a></li>
 									</ul>
 								</li>
-								<li class="active dropdown">
+								<li>
 									<a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
 										<li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
-										<li><a href="myproducts.html" title="My Products">My Products</a></li>
 									</ul>
 								</li>
 							</ul>
@@ -123,6 +121,7 @@
 				</div><!-- Container /- -->
 			</div>
 		</header><!-- Header Section /- -->
+
 
 
 		<main>
@@ -147,12 +146,7 @@
 					<!-- Type Post -->
 				</div>
 			</div>
-
-		</main>
-
-		<!-- Footer Section -->
-		<!--update comment-->
-	<div class="modal fade" id="Delete-Post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="Delete-Post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
@@ -171,8 +165,25 @@
 		</div>
 
     </div>
-	<!----->
 
+				<!--update comment-->
+	
+
+		</main>
+		<!-- Footer Section -->
+		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+
+			Developed By: Dream Team
+			<p>Copyright &copy 2018</p>
+
+		</footer><!-- Footer Section /- -->
+
+		<!-- Footer Section -->
+	
+
+
+        
+	
 		<!-- JQuery v1.12.4 -->
 		<script src="js/jquery-1.12.4.min.js"></script>
 

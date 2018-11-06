@@ -16,7 +16,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Product - Hiking</title>
+    <title>Edit Post - Hiking</title>
 
     <!-- Standard Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
@@ -63,6 +63,7 @@
             </div>
         </div><!-- Loader /- -->
 
+          <!-- Header Section -->
         <header class="container-fluid no-padding header-section">
 
             <div class="container-fluid no-padding menu-block">
@@ -72,8 +73,8 @@
                     <nav class="navbar navbar-default ow-navigation">
                         <div class="navbar-header">
 
-                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
-                                class="navbar-toggle collapsed" type="button">
+                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed"
+                             type="button">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar">
                                 </span>
@@ -94,24 +95,21 @@
                         <div class="navbar-collapse collapse" id="navbar">
                             <hr style="margin-bottom: 0px;">
                             <ul class="nav navbar-nav" style="margin-top: 0px;">
-                                <li><a href="blog.html" title="Blog">HOME</a></li>
-
+                                <li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
+                                <li><a href="profile.html" title="Blog">PROFILE</a></li>
                                 <li>
-                                    <a href="destination.html" title="Destination" class="dropdown-toggle" role="button"
-                                        aria-haspopup="true" aria-expanded="false">EVENTS</a>
+                                    <a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+                                     aria-expanded="false">EVENTS</a>
                                     <i class="ddl-switch fa fa-angle-down"></i>
                                     <ul class="dropdown-menu">
                                         <li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
-                                        <li><a href="myevents.html" title="My Events">My Events</a></li>
                                     </ul>
                                 </li>
-                                <li class="active dropdown">
-                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button"
-                                        aria-haspopup="true" aria-expanded="false">SHOP</a>
+                                <li>
+                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
                                     <i class="ddl-switch fa fa-angle-down"></i>
                                     <ul class="dropdown-menu">
                                         <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
-                                        <li><a href="myproducts.html" title="My Products">My Products</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -123,6 +121,8 @@
             </div>
         </header><!-- Header Section /- -->
 
+
+
         <main>
 
             <!-- Page Header -->
@@ -130,7 +130,7 @@
                 <div class="container">
                     <ol class="breadcrumb">
                         <li><a href="#">Home</a></li>
-                        <li class="active">Shop</li>
+                        <li class="active">POST</li>
                     </ol>
                 </div>
             </div><!-- Page Header /- -->
@@ -179,7 +179,10 @@
         </main>
 
         <!-- Footer Section -->
-        <footer class="footer-main container-fluid no-padding footer-section2">
+        <footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+
+            Developed By: Dream Team
+            <p>Copyright &copy 2018</p>
 
         </footer><!-- Footer Section /- -->
 
