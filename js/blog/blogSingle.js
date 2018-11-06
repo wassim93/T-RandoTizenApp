@@ -19,22 +19,23 @@ var loadData = () => {
     document.getElementById("imagePost").innerHTML = `<a href="#"><img src="http://localhost:8000/image/${JSON.parse(xhr.responseText).image_path}" alt="Blog" /></a>`
 }
     xhr.send()
-    loadComments(id)
+    loadComments()
 
 }
 
-var loadComments = (id) => {
+var loadComments = () => {
 
     var xhr = new XMLHttpRequest()
     var id = localStorage.getItem("idpostdetail")
     xhr.open('GET', `http://localhost:8000/getcomments/${id}`, false)
     xhr.onreadystatechange = () => {
+     
         var list = JSON.parse(xhr.responseText)
-        list.map(async x => {
+        list.map( async x => {
             var visibility = "hidden"
             var check = await checkComment(x.id)
             console.log(x.id)
-            console.log(check)
+         //   console.log(check)
             if (JSON.parse(check).response === "true") {
                 visibility = "visible"
             }
@@ -44,7 +45,7 @@ var loadComments = (id) => {
                 <div class="editbutt" align="right" style="visibility:${visibility}">
                   <i class="fas fa-cog"  onclick="edit(${x.id})">
                   </i>
-                  <i class="fas fa-trash"  onclick="supprimer(${x.id})">
+                  <i class="fas fa-trash"  onclick="OpenDeleteDialog(${x.id})">
                   </i>
                 </div>
 
@@ -55,16 +56,18 @@ var loadComments = (id) => {
                 <div align="right"> 
                  <span style="font-size:10px">${x.date}</span>
                 </div>
+                <hr style="border:1 solid #555">
           </div>
-         <hr style="border:1 solid #555">
+    
            `)
 
-
+              
         })
 
-
+  
 
     }
+    
     xhr.send()
 
 
@@ -102,23 +105,34 @@ var comment = () => {
     xhr.open('POST', `http://localhost:8000/AddComment`, true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onreadystatechange = () => {
-        $("#comments").html(" ")
-        window.location = "blog-single.html"
+          if(xhr.readyState===4 && xhr.status===200){
+             
+            $(".comment-box").remove()
+            loadComments()
+          }
+       
     }
-
+       
+  
     xhr.send(JSON.stringify(comment))
 
 
 }
 
-var supprimer = (id)=>{
+var supprimer = ()=>{
+    var id = localStorage.getItem("idcommentdelete")
     var xhr = new XMLHttpRequest()
     xhr.open('GET', `http://localhost:8000/RemoveComment/${id}`, false)
     xhr.onreadystatechange = () => {
-        $("#comments").html(" ")
-        window.location = "blog-single.html"
+        if(xhr.readyState===4 && xhr.status===200){
+       
+            $(".comment-box").remove()
+            loadComments()
+        }
+ 
     }
-
+    localStorage.removeItem("idcommentdelete")
+    $("#Delete-Post").modal("hide")
     xhr.send()
 
 }
@@ -130,6 +144,7 @@ function edit(id) {
     var xhr = new XMLHttpRequest()
     xhr.open('GET', `http://localhost:8000/GetCommentById/${id}`, false)
     xhr.onreadystatechange = () => {
+        
       document.getElementById("commentToEdit").value = JSON.parse(xhr.responseText).content
     }
 
@@ -152,12 +167,15 @@ function edit(id) {
     xhr.open('POST', `http://localhost:8000/UpdateComment`, true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.onreadystatechange = () => {
-        $("#comments").html(" ")
-        window.location = "blog-single.html"
+       if(xhr.readyState===4 && xhr.status===200){
+        $(".comment-box").remove()
+        loadComments()
+      
+       }
     }
-
+ 
     xhr.send(JSON.stringify(comment))
-
+    $("#update-comment").modal("hide");
 
   }
   var checkLike = (idpost, token) => {
@@ -212,4 +230,12 @@ var HitLike = (event)=>{
 
 
 
+}
+
+var OpenDeleteDialog  = (id)=>{
+
+    $("#Delete-Post").modal("show")
+    localStorage.setItem("idcommentdelete", id)
+
+    
 }
