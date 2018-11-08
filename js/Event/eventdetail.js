@@ -1,7 +1,19 @@
 var retrievedObject;
 retrievedObject = JSON.parse(localStorage.getItem("selectedEvent"));
+var token = {
+	    token: localStorage.getItem('access_token')
+	}
+
+//Bind hardware back button.
+window.addEventListener('tizenhwkey', function onTizenHwKey(e) {
+    if (e.keyName === 'back') {
+    	window.history.back();
+    }
+});
 
 function getEventDetail() {
+    document.getElementById("imgprof").innerHTML = `<img class="profile-image" style="width:50px;height:50px;border-radius:50%" src="http://10.0.2.2:8000/image/${localStorage.getItem("profile_image")}" alt="profilepic" />`
+
     $("#eventTitle").html(retrievedObject["title"]);
     $("#depart").html('<i class="fa fa-map-marker" style="color: red;"></i>' + retrievedObject["point_depart"]);
     $("#destination").html('<i class="fa fa-map-marker" style="color: green;"></i>' + retrievedObject["point_arrive"]);
@@ -33,10 +45,10 @@ function showSlider(res) {
         var featureDetail = document.createElement("div");
         featureDetail.setAttribute("class", "features-detail");
         var image = document.createElement("img");
-        image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["image"]);
+        image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[i]["image"]);
         image.setAttribute("style", "height:270px;width:270px;");
         var a = document.createElement("a");
-        a.setAttribute("href", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["image"]);
+        a.setAttribute("href", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[i]["image"]);
         var i1 = document.createElement("i");
         i1.setAttribute("class", "fa fa-search");
         a.appendChild(i1);
@@ -78,10 +90,10 @@ function showOneImage(res) {
     var featureDetail = document.createElement("div");
     featureDetail.setAttribute("class", "features-detail");
     var image = document.createElement("img");
-    image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[0]["image"]);
+    image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[0]["image"]);
     image.setAttribute("style", "height:270px;width:270px;");
     var a = document.createElement("a");
-    a.setAttribute("href", "http://localhost:8088/trandobackend/web/bundles/images/" + res[0]["image"]);
+    a.setAttribute("href", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[0]["image"]);
     var i1 = document.createElement("i");
     i1.setAttribute("class", "fa fa-search");
     a.appendChild(i1);
@@ -94,7 +106,7 @@ function showOneImage(res) {
 // check user participation on load to change button style 
 function checkparticipate() {
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/checkparticipate";
+    var url = "http://10.0.2.2:8000/checkparticipate";
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -107,13 +119,13 @@ function checkparticipate() {
 
         }
     };
-    var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": retrievedObject["id"] });
+    var data = JSON.stringify({ "token": token, "idevent": retrievedObject["id"] });
     xhr.send(data);
 
 }
 function participate() {
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/participate";
+    var url = "http://10.0.2.2:8000/participate";
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -132,7 +144,7 @@ function participate() {
 
         }
     };
-    var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": retrievedObject["id"] });
+    var data = JSON.stringify({ "token": token, "idevent": retrievedObject["id"] });
     xhr.send(data);
 
 }
@@ -154,7 +166,7 @@ function changeButtonStyle(btn, res) {
 }
 function cancelParticipate() {
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/deletepart";
+    var url = "http://10.0.2.2:8000/deletepart";
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -166,7 +178,8 @@ function cancelParticipate() {
                 btn.setAttribute("class", "btn btn-success");
                 btn.innerHTML = "Participate";
                 btn.setAttribute("onclick", "participate();")
-                $("#" + retrievedObject["user"]["username"]).remove();
+                //$("#" + retrievedObject["user"]["username"]).remove();
+                $('#participantDiv li:last-child').remove();
                 if ($("#participantDiv li").length >= 1) {
                     LoadParticipant();
 
@@ -178,14 +191,14 @@ function cancelParticipate() {
 
         }
     };
-    var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": retrievedObject["id"] });
+    var data = JSON.stringify({ "token": token, "idevent": retrievedObject["id"] });
     xhr.send(data);
 }
 
 function LoadParticipant() {
 
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/GetEventParticipant/" + retrievedObject["id"];
+    var url = "http://10.0.2.2:8000/GetEventParticipant/" + retrievedObject["id"];
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -208,8 +221,8 @@ function LoadParticipant() {
 }
 
 function showParticipantList(res) {
-    console.log(retrievedObject);
     var ul = document.getElementById("listPar");
+    $("#listPar").empty();
     for (var i = 0; i < res.length; i++) {
         var li = document.createElement("li");
         li.setAttribute("class", "col-md-6 no-padding");
@@ -217,7 +230,7 @@ function showParticipantList(res) {
         var image = document.createElement("img");
         image.setAttribute("class", "thumbnail");
         image.setAttribute("style", "width: 60px;height: 60px;border-radius: 60px;");
-        image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["_profile_pic_url"]);
+        image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[i]["_profile_pic_url"]);
         li.appendChild(image);
         ul.appendChild(li);
     }

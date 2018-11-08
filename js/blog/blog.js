@@ -1,36 +1,44 @@
-  var loadData = () => {
-      var LikedButtonColor = " "
-      var upsuppbutt = "hidden"
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'http://localhost:8000/getAllPosts', false)
-
-      xhr.onreadystatechange = () => {
-          if (xhr.readyState === 4) {
+var loadData = () => {
 
 
-              JSON.parse(xhr.responseText).map(async x => {
+    CheckUserFirst()
+    var LikedButtonColor = " "
+    var upsuppbutt = " "
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', 'http://10.0.2.2:8000/getAllPosts', false)
 
-                  var ServerResp = await checkLike(x.id, localStorage.getItem("access_token"))
-                  if (JSON.parse(ServerResp).response === "true") {
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
 
-                      LikedButtonColor = "red"
-                  }
-                  var checku = await checkUser(x.id, localStorage.getItem("access_token"))
-                  if (JSON.parse(checku).response === "true") {
-                      upsuppbutt = "visible"
 
-                  }
+            JSON.parse(xhr.responseText).forEach(async x => {
 
-                  $('#myList').append(
-                      `<div class="type-post">
-                            <div style="visbility:${upsuppbutt}" align="right">
+                var ServerResp = await checkLike(x.id, localStorage.getItem("access_token"))
+                if (JSON.parse(ServerResp).response === "true") {
+
+                    LikedButtonColor = "red"
+                }
+                var checku = await checkUser(x.id, localStorage.getItem("access_token"))
+                console.log(checku)
+                if (JSON.parse(checku).response === "true") {
+                    upsuppbutt = "visible"
+                    	
+
+                }else{
+                	 upsuppbutt = "hidden"
+                }
+
+                $('#myList').append(
+                    `<div class="type-post">
+                   
+                            <div style="visibility:${upsuppbutt}" align="right">
                             <i class="fas fa-cog"  onclick="edit(${x.id},event)">
                             </i>
                             <i class="fas fa-trash"  onclick="OpenConfirmDeleteDialg(${x.id})">
                             </i> 
                             </div>
 							<div class="entry-cover">
-								<a href="#"><img src="http://localhost:8000/image/${x.image_path}" alt="Blog" /></a>
+								<a href="#"><img src="http://10.0.2.2:8000/image/${x.image_path}" alt="Blog" /></a>
 							</div>
 							<div class="entry-meta">
 								<div class="post-like" >
@@ -44,106 +52,123 @@
 								</div>
 							</div>
 							<div class="entry-content">
-								<p>So this is the tale of our castaways they're here for a long long time. </p>
-								<a href="#" title="read more" onclick="ShowDetail(${x.id},event)">read more</a>
+								<p>${x.content} </p>
+								<a href="#" title="read more" onclick="ShowDetail(${x.id},event)">more details</a>
 							</div>
 
 						</div>
-                
-                `)
-                  LikedButtonColor = " "
-              })
+     `)
+                LikedButtonColor = " "
+            })
 
-          }
+        }
 
-      }
-      xhr.send()
-  }
-  var checkLike = (idpost, token) => {
-      return new Promise((resolve, reject) => {
+    }
+    xhr.send()
+}
+var checkLike = (idpost, token) => {
+    return new Promise((resolve, reject) => {
 
-          var xhr = new XMLHttpRequest()
-          xhr.open('POST', 'http://localhost:8000/checkliked', true)
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://10.0.2.2:8000/checkliked', true)
 
-          xhr.onload = () => {
-              if (xhr.readyState === 4) {
-                  resolve(xhr.responseText)
+        xhr.onload = () => {
+            if (xhr.readyState === 4) {
+                resolve(xhr.responseText)
 
-              }
-          }
-          xhr.onerror = function () {
-              reject({
-                  status: this.status,
-                  statusText: xhr.statusText
-              });
-          };
-          xhr.send(JSON.stringify({
-              idpost: idpost,
-              token: token
-          }))
-
-
-      })
-
-  }
-  var checkUser = (idpost, token) => {
-      return new Promise((resolve, reject) => {
-
-          var xhr = new XMLHttpRequest()
-          xhr.open('POST', 'http://localhost:8000/checkPostuser', true)
-
-          xhr.onload = () => {
-              if (xhr.readyState === 4) {
-                  resolve(xhr.responseText)
-
-              }
-          }
-          xhr.onerror = function () {
-              reject({
-                  status: this.status,
-                  statusText: xhr.statusText
-              });
-          };
-          xhr.send(JSON.stringify({
-              idpost: idpost,
-              token: token
-          }))
+            }
+        }
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send(JSON.stringify({
+            idpost: idpost,
+            token: token
+        }))
 
 
-      })
+    })
 
-  }
-  var ShowDetail = (id, event) => {
-      event.preventDefault()
-      localStorage.setItem("idpostdetail", id)
-      window.location = "blog-single.html"
-  }
-  var edit = (id, event) => {
-      event.preventDefault()
-      localStorage.setItem("idpostdetail", id)
-      window.location = "EditPost.html"
+}
+var checkUser = (idpost, token) => {
+    return new Promise((resolve, reject) => {
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST', 'http://10.0.2.2:8000/checkPostuser', true)
+
+        xhr.onload = () => {
+            if (xhr.readyState === 4) {
+                resolve(xhr.responseText)
+
+            }
+        }
+        xhr.onerror = function () {
+            reject({
+                status: this.status,
+                statusText: xhr.statusText
+            });
+        };
+        xhr.send(JSON.stringify({
+            idpost: idpost,
+            token: token
+        }))
 
 
-  }
+    })
 
-  var AddPost = () => {
-      window.location = "addPost.html"
-  }
+}
+var ShowDetail = (id, event) => {
+    event.preventDefault()
+    localStorage.setItem("idpostdetail", id)
+    window.location = "blog-single.html"
+}
+var edit = (id, event) => {
+    event.preventDefault()
+    localStorage.setItem("idpostdetail", id)
+    window.location = "EditPost.html"
 
-  var supprimer = () => {
-      var id = localStorage.getItem("idpostdelete")
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', `http://localhost:8000/Removepost/${id}`, false)
 
-      xhr.onreadystatechange = () => {
-          window.location = "blog.html"
-      }
-      xhr.send()
-      localStorage.removeItem("idpostdelete")
-  }
+}
 
-  var OpenConfirmDeleteDialg = (id) => {
+var AddPost = () => {
+    window.location = "addPost.html"
+}
 
-      $("#Delete-Post").modal("show")
-      localStorage.setItem("idpostdelete", id)
-  }
+var supprimer = () => {
+    var id = localStorage.getItem("idpostdelete")
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', `http://10.0.2.2:8000/Removepost/${id}`, false)
+
+    xhr.onreadystatechange = () => {
+        window.location = "blog.html"
+    }
+    xhr.send()
+    localStorage.removeItem("idpostdelete")
+}
+
+var OpenConfirmDeleteDialg = (id) => {
+
+    $("#Delete-Post").modal("show")
+    localStorage.setItem("idpostdelete", id)
+}
+
+var CheckUserFirst = () => {
+
+    //getUserByToken
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', `http://10.0.2.2:8000/getUserByToken`, true)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.onreadystatechange = () => {
+
+        if (JSON.parse(xhr.responseText)._fisrt_name === "default") {
+            window.location = "completeProfile.html"
+        } else {
+            localStorage.setItem("profile_image", JSON.parse(xhr.responseText)._profile_pic_url)
+            document.getElementById("imgprof").innerHTML = `<img class="profile-image" style="width:50px;height:50px;border-radius:50%" src="http://10.0.2.2:8000/image/${JSON.parse(xhr.responseText)._profile_pic_url}" alt="profilepic" />`
+        }
+    }
+    xhr.send(JSON.stringify({ token: localStorage.getItem("access_token") }))
+}

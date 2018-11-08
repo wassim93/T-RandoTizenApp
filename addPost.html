@@ -63,63 +63,68 @@
             </div>
         </div><!-- Loader /- -->
 
-       <!-- Header Section -->
-		<header class="container-fluid no-padding header-section">
+        <!-- Header Section -->
+        <header class="container-fluid no-padding header-section">
 
-			<div class="container-fluid no-padding menu-block">
-				<!-- Container -->
-				<div class="container">
-					<!-- nav -->
-					<nav class="navbar navbar-default ow-navigation">
-						<div class="navbar-header">
+            <div class="container-fluid no-padding menu-block">
+                <!-- Container -->
+                <div class="container">
+                    <!-- nav -->
+                    <nav class="navbar navbar-default ow-navigation">
+                        <div class="navbar-header">
 
-							<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed"
-							 type="button">
-								<span class="sr-only">Toggle navigation</span>
-								<span class="icon-bar">
-								</span>
-								<span class="icon-bar">
-								</span>
-								<span class="icon-bar">
+                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                                class="navbar-toggle collapsed" type="button">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
+                                </span>
+                                <span class="icon-bar">
 
-								</span>
-							</button>
+                                </span>
+                            </button>
 
-							<a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
-							<div class="profile-section">
-								<a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+                            <a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
+                            <div class="profile-section">
+                                <a href="profile.html" id="imgprof"><img class="profile-image" src="images/testi-1.jpg"
+                                        alt="profilepic" /></a>
 
-							</div>
+                            </div>
 
-						</div>
-						<div class="navbar-collapse collapse" id="navbar">
-							<hr style="margin-bottom: 0px;">
-							<ul class="nav navbar-nav" style="margin-top: 0px;">
-								<li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
-								<li><a href="profile.html" title="Blog">PROFILE</a></li>
-								<li>
-									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
-									 aria-expanded="false">EVENTS</a>
-									<i class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
-									<i class="ddl-switch fa fa-angle-down"></i>
-									<ul class="dropdown-menu">
-										<li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<!--/.nav-collapse -->
+                        </div>
+                        <div class="navbar-collapse collapse" id="navbar">
+                            <hr style="margin-bottom: 0px;">
+                            <ul class="nav navbar-nav" style="margin-top: 0px;">
+                                <li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
+                                <li><a href="profile.html" title="Blog">PROFILE</a></li>
+                                <li>
+                                    <a href="events.html" title="Destination" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">EVENTS</a>
+                                    <i class="ddl-switch fa fa-angle-down"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">SHOP</a>
+                                    <i class="ddl-switch fa fa-angle-down"></i>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--/.nav-collapse -->
 
-					</nav><!-- nav /- -->
-				</div><!-- Container /- -->
-			</div>
-		</header><!-- Header Section /- -->
+                    </nav><!-- nav /- -->
+                </div><!-- Container /- -->
+            </div>
+        </header><!-- Header Section /- -->
 
         <main>
 
@@ -151,13 +156,13 @@
 
                                         <div class="col-md-6 form-group">
                                             <label>Content</label>
-                                            <textarea id="desc" name="desc" class="form-control"></textarea>
+                                            <textarea id="desc" name="desc" class="form-control" required="required"></textarea>
 
                                         </div>
 
 
                                         <div class="col-md-6 form-group">
-                                            <input type="file" id="files" name="files[]" multiple />
+                                            <input type="file" id="files" name="files[]" multiple required="required"/>
                                             <div id="preview" style="display:none;"></div>
                                             <span class="error">This field is required</span>
                                         </div>
@@ -177,12 +182,12 @@
         </main>
 
         <!-- Footer Section -->
-		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+        <footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
-			Developed By: Dream Team
-			<p>Copyright &copy 2018</p>
+            Developed By: Dream Team
+            <p>Copyright &copy 2018</p>
 
-		</footer><!-- Footer Section /- -->
+        </footer><!-- Footer Section /- -->
 
     </div>
 
@@ -196,7 +201,7 @@
     <script src="js/functions.js"></script>
     <script src="js/scripts.js"></script>
 
-     <script src="js/blog/AddPost.js"></script>
+    <script src="js/blog/AddPost.js"></script>
 
     <script type="text/javascript">
         $("#files").val("");
@@ -230,7 +235,14 @@
         });
     </script>
 
+    <script>
+        function Logout(event) {
+            event.preventDefault()
+            localStorage.clear()
+            window.location = "index.html"
+        }
 
+    </script>
 </body>
 
 <!-- Mirrored from premiumlayers.net/demo/html/hiking/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:46 GMT -->

@@ -88,7 +88,7 @@
 
 							<a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
 							<div class="profile-section">
-								<a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+								<a href="profile.html"><span id="imgprof"></span></a>
 
 							</div>
 
@@ -99,7 +99,7 @@
 								<li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
 								<li><a href="profile.html" title="Blog">PROFILE</a></li>
 								<li>
-									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+									<a href="events.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
 									 aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
@@ -113,6 +113,9 @@
 										<li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
 									</ul>
 								</li>
+								<li>
+                                        <a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+                                    </li>
 							</ul>
 						</div>
 						<!--/.nav-collapse -->
@@ -147,27 +150,27 @@
 				</div>
 			</div>
 			<div class="modal fade" id="Delete-Post" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
-					Confirm delete 
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
+							Confirm delete
+						</div>
+
+						<div class="modal-body">
+							Are you sure ?
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<input id="Delete" type="button" onclick="supprimer()" class="btn btn-warning btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
+							 value="Delete" />
+						</div>
+					</div>
 				</div>
-				
-                <div class="modal-body">
-                    Are you sure ? 
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<input id="Delete" type="button"onclick="supprimer()" class="btn btn-warning btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
-					 value="Delete" />
-				</div>
+
 			</div>
-		</div>
 
-    </div>
+			<!--update comment-->
 
-				<!--update comment-->
-	
 
 		</main>
 		<!-- Footer Section -->
@@ -179,11 +182,11 @@
 		</footer><!-- Footer Section /- -->
 
 		<!-- Footer Section -->
-	
 
 
-        
-	
+
+
+
 		<!-- JQuery v1.12.4 -->
 		<script src="js/jquery-1.12.4.min.js"></script>
 
@@ -195,6 +198,14 @@
 		<script src="js/home/home.js"></script>
 		<script src="js/blog/blog.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+		<script>
+				function Logout(event) {
+					event.preventDefault()
+					localStorage.clear()
+					window.location = "index.html"
+				}
+		
+			</script>
 
 </body>
 

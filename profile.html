@@ -7,7 +7,7 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
-html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+  html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 .w3-third{
   opacity: 0.8;
@@ -23,61 +23,69 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 }
 
 </style>
+
 <body class="w3-light-grey" onload="loadData()">
-  
-<div  id="bg" ondblclick="ChangeBackground()" style="color: firebrick;height: 220px;
-background-size: 320px 250px;padding-top: 2cm;" >
-<div align="center">
-  <img  id="profile-img"  src="https://www.w3schools.com/w3images/avatar_hat.jpg" width="170px" style="border-radius: 50%;"   height="170px" alt="Avatar">
-   <input type="file" id="chgbg" onchange="UploadBg()" style="visibility: hidden;"/>
-</div>
-</div>
-<!-- Page Container -->
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
 
-  <!-- The Grid -->
-  <div class="w3-row-padding">
-  
-    <!-- Left Column -->
-    <div class="w3-third">
- 
-  
-          <div class="w3-display-bottomleft w3-container w3-text-black"></div>  
-            <h2 id="fullname" align="center">Jane Doe</h2>
-          </div>
-       
-        </div>
-        <div class="w3-container">
-          <div style="margin-top:1em;display:flex;flex-direction: column;align-content: center;justify-content: center;align-items: center">
-  
-            <label for="image" class="label-file">changer votre photo de profile 
-            <input class="input-file" type="file" id="image" onchange="UploadFile()">  
-            </label>
-          <br>
-            <div id="loading"></div>
-        </div>
+  <div id="bg" ondblclick="ChangeBackground()" style="color: firebrick;height: 220px;
+background-size: 320px 250px;padding-top: 2cm;background-image:url('images/photographs4.jpg')">
+    <div align="center">
+      <img id="profile-img" src="https://www.w3schools.com/w3images/avatar_hat.jpg" width="170px" style="border-radius: 50%;"
+        height="170px" alt="Avatar">
 
-          <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal" id="email"></i></p>
-          <hr>
-          <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal" id="phone"></i></p>
-          <hr>
-          <p ><i style="width:auto;" class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal" id="address"></i></p>
-          <hr>
-
-        
-        </div>
-      </div><br>
-
-    <!-- End Left Column -->
     </div>
+  </div>
+  <!-- Page Container -->
+  <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+      <!-- Left Column -->
+      <div class="w3-third">
+
+
+        <div class="w3-display-bottomleft w3-container w3-text-black"></div>
+        <h2 id="fullname" align="center">Jane Doe</h2>
+      </div>
+      <div align="right"><i class="fa fa-cog" onclick="OpenEditModal()"></i></div>
+    </div>
+    <div class="w3-container">
+      <div style="margin-top:1em;display:flex;flex-direction: column;align-content: center;justify-content: center;align-items: center">
+
+        <label for="image" class="label-file">change profile image
+          <input class="input-file" type="file" id="image" onchange="UploadFile()">
+        </label>
+        <label for="chgbg" class="label-file">change background image
+          <input class="input-file" type="file" id="chgbg" onchange="UploadBg()" />
+        </label>
+        <br>
+        <div id="loading"></div>
+      </div>
+
+      <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal" id="email"></i></p>
+      <hr>
+      <p><i class="fa fa-phone fa-fw w3-margin-right w3-large w3-text-teal" id="phone"></i></p>
+      <hr>
+      <p><i style="width:auto;" class="fa fa-home fa-fw w3-margin-right w3-large w3-text-teal" id="address"></i></p>
+      <hr>
+
+
+    </div>
+  </div><br>
+
+  <!-- End Left Column -->
+  </div>
 
   <!-- End Grid -->
   </div>
-  
-  <!-- End Page Container -->
-</div>
 
+  <!-- End Page Container -->
 
 </body>
+<script src="js/jquery-1.12.4.min.js"></script>
+
 <script src="./js/profile/profile.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+
+
 </html>

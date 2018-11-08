@@ -52,7 +52,7 @@
 
 </head>
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+<body onload="getData();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
     <div class="main-container">
         <!-- Loader -->
         <div id="site-loader" class="load-complete">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div><!-- Loader /- -->
-   <!-- Header Section -->
+        <!-- Header Section -->
         <header class="container-fluid no-padding header-section">
 
             <div class="container-fluid no-padding menu-block">
@@ -72,8 +72,8 @@
                     <nav class="navbar navbar-default ow-navigation">
                         <div class="navbar-header">
 
-                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed"
-                             type="button">
+                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse"
+                                class="navbar-toggle collapsed" type="button">
                                 <span class="sr-only">Toggle navigation</span>
                                 <span class="icon-bar">
                                 </span>
@@ -86,7 +86,7 @@
 
                             <a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
                             <div class="profile-section">
-                                <a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+                                <a href="profile.html"><span id="imgprof"></span></a>
 
                             </div>
 
@@ -97,20 +97,24 @@
                                 <li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
                                 <li><a href="profile.html" title="Blog">PROFILE</a></li>
                                 <li>
-                                    <a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
-                                     aria-expanded="false">EVENTS</a>
+                                    <a href="events.html" title="Destination" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">EVENTS</a>
                                     <i class="ddl-switch fa fa-angle-down"></i>
                                     <ul class="dropdown-menu">
                                         <li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
+                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button"
+                                        aria-haspopup="true" aria-expanded="false">SHOP</a>
                                     <i class="ddl-switch fa fa-angle-down"></i>
                                     <ul class="dropdown-menu">
                                         <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                        <a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+                                    </li>
                             </ul>
                         </div>
                         <!--/.nav-collapse -->
@@ -247,6 +251,17 @@
 
 
     <script>
+
+//Bind hardware back button.
+window.addEventListener('tizenhwkey', function onTizenHwKey(e) {
+    if (e.keyName === 'back') {
+    	window.history.back();
+    }
+});
+        function getData() {
+            document.getElementById("imgprof").innerHTML = `<img class="profile-image" style="width:50px;height:50px;border-radius:50%" src="http://10.0.2.2:8000/image/${localStorage.getItem("profile_image")}" alt="profilepic" />`
+
+        }
         var imgSrcs = [];
 
         $(document).ready(function () {
@@ -324,10 +339,13 @@
 
         function SaveEvent() {
 
+var token = {
+  token: localStorage.getItem('access_token')
+}
             //loader show 
             $("#submitLoader").css("display", "block");
             var xhr = new XMLHttpRequest();
-            var url = "http://localhost:8000/AddEvent";
+            var url = "http://10.0.2.2:8000/AddEvent";
             xhr.open("POST", url, true);
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
@@ -338,7 +356,7 @@
                     );
                 }
             };
-            var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "image": imgSrcs, "contact": $("#phone").val(), "date": $("#date").val(), "pointDepart": $("#depart").val(), "pointArrive": $("#destination").val(), "nbrPlace": $("#nbplace").val(), "niveau": "" });
+            var data = JSON.stringify({ "token": token, "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "image": imgSrcs, "contact": $("#phone").val(), "date": $("#date").val(), "pointDepart": $("#depart").val(), "pointArrive": $("#destination").val(), "nbrPlace": $("#nbplace").val(), "niveau": "" });
             xhr.send(data);
 
         }
@@ -370,6 +388,14 @@
         }
     </script>
 
+<script>
+        function Logout(event) {
+            event.preventDefault()
+            localStorage.clear()
+            window.location = "index.html"
+        }
+
+    </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxmYzwxbs1PlNhSN8yAVEPvNRfXinvKfs&libraries=places&callback=initAutocomplete"
         async defer></script>

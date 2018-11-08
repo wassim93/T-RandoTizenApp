@@ -87,7 +87,7 @@
 
                             <a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
                             <div class="profile-section">
-                                <a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+                                <a href="profile.html" ><span id="imgprof"></span></a>
 
                             </div>
 
@@ -98,7 +98,7 @@
                                 <li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
                                 <li><a href="profile.html" title="Blog">PROFILE</a></li>
                                 <li>
-                                    <a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+                                    <a href="events.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
                                      aria-expanded="false">EVENTS</a>
                                     <i class="ddl-switch fa fa-angle-down"></i>
                                     <ul class="dropdown-menu">
@@ -112,6 +112,9 @@
                                         <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
                                     </ul>
                                 </li>
+                                <li>
+                                        <a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+                                    </li>
                             </ul>
                         </div>
                         <!--/.nav-collapse -->
@@ -231,6 +234,15 @@
             }
         });
     </script>
+
+<script>
+		function Logout(event) {
+			event.preventDefault()
+			localStorage.clear()
+			window.location = "index.html"
+		}
+
+	</script>
 
 
 </body>

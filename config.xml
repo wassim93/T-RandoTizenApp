@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<widget xmlns:tizen="http://tizen.org/ns/widgets" xmlns="http://www.w3.org/ns/widgets" id="http://yourdomain/AppCallee" version="1.0.0" viewmodes="maximized">
-    <tizen:app-control>
-        <tizen:src name="index.html"/>
-        <tizen:operation name="http://tizen.org/appcontrol/operation/appcall"/>
-    </tizen:app-control>
-    <tizen:application id="wB5q4Co7el.AppCallee" package="wB5q4Co7el" required_version="2.3"/>
-    <content src="index.html"/>
+<widget xmlns="http://www.w3.org/ns/widgets" xmlns:tizen="http://tizen.org/ns/widgets" id="http://yourdomain/TuniRando" version="1.0.0" viewmodes="maximized">
+    <access origin="*" subdomains="true"/>
+    <tizen:application id="FEbRZKnEWR.TuniRando" package="FEbRZKnEWR" required_version="3.0"/>
+    <content src="splashScreen.html"/>
+    <tizen:content-security-policy>http://10.0.2.2:8000</tizen:content-security-policy>
     <feature name="http://tizen.org/feature/screen.size.all"/>
     <icon src="icon.png"/>
-    <name>AppCallee</name>
-    <tizen:privilege name="http://tizen.org/privilege/application.info"/>
-    <tizen:privilege name="http://tizen.org/privilege/application.launch"/>
+    <name>TuniRando</name>
+    <tizen:privilege name="http://tizen.org/privilege/internet"/>
     <tizen:profile name="mobile"/>
 </widget>

@@ -1,11 +1,15 @@
 var selectedEvent;
 var imgSrcs = [];
+var token = {
+    token: localStorage.getItem('access_token')
+}
 
 //get event this week 
 function getData() {
+    document.getElementById("imgprof").innerHTML = `<img class="profile-image" style="width:50px;height:50px;border-radius:50%" src="http://10.0.2.2:8000/image/${localStorage.getItem("profile_image")}" alt="profilepic" />`
 
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/geteventofthisweek";
+    var url = "http://10.0.2.2:8000/geteventofthisweek";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -56,8 +60,8 @@ function showSlider(res) {
         var featureDetail = document.createElement("div");
         featureDetail.setAttribute("class", "features-detail");
         var image = document.createElement("img");
-        image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["image"][0]["image"]);
-        image.setAttribute("style", "height:270px;width:270px;");
+        image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[i]["image"][0]["image"]);
+        image.setAttribute("style", "height:270px;width:370px;");
         var htext = document.createElement("h4");
         htext.innerHTML = res[i]["title"];
         var a = document.createElement("a");
@@ -105,7 +109,7 @@ function showOneEvent(res) {
     var featureDetail = document.createElement("div");
     featureDetail.setAttribute("class", "features-detail");
     var image = document.createElement("img");
-    image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[0]["image"][0]["image"]);
+    image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[0]["image"][0]["image"]);
     image.setAttribute("style", "height:270px;width:270px;");
     var htext = document.createElement("h4");
     htext.innerHTML = res[0]["title"];
@@ -125,7 +129,7 @@ function showOneEvent(res) {
 //get all events
 function loadEvents() {
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/GetAllEvent";
+    var url = "http://10.0.2.2:8000/GetAllEvent";
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -145,7 +149,9 @@ function loadEvents() {
     xhr.send();
 }
 
-function appendAllEventsData(res) {
+var  appendAllEventsData = async(res) =>{
+
+
     var eventlist = document.getElementById("eventlist");
     for (var i = 0; i < res.length; i++) {
         var destinationBox = document.createElement("div");
@@ -154,8 +160,8 @@ function appendAllEventsData(res) {
         var destinationContent = document.createElement("div");
         destinationContent.setAttribute("class", "destination-content");
         var image = document.createElement("img");
-        image.setAttribute("src", "http://localhost:8088/trandobackend/web/bundles/images/" + res[i]["image"][0]["image"]);
-        //image.setAttribute("style", "height:270px;width:270px;");
+        image.setAttribute("src", "http://10.0.2.2:8088/trandobackend/web/bundles/images/" + res[i]["image"][0]["image"]);
+        image.setAttribute("style", "width:370px;");
         var htext = document.createElement("h3");
         var span = document.createElement("span");
         span.innerHTML = res[i]["title"];
@@ -172,7 +178,6 @@ function appendAllEventsData(res) {
         h2text.appendChild(span1);
         var ul = document.createElement("ul");
         var li1 = document.createElement("li");
-        li1.setAttribute("class", "updatebtn");
         var a1 = document.createElement("a");
         a1.setAttribute("id", JSON.stringify(res[i]));
         a1.setAttribute("onclick", "showUpdateModal(this.id);")
@@ -191,7 +196,7 @@ function appendAllEventsData(res) {
         li2.appendChild(a2);
 
         var li3 = document.createElement("li");
-        li3.setAttribute("class", "deletebtn");
+        
         var a3 = document.createElement("a");
         a3.setAttribute("id", res[i]["id"]);
         a3.setAttribute("onclick", "showDeleteModal(this.id);")
@@ -216,38 +221,52 @@ function appendAllEventsData(res) {
         destinationBox.appendChild(destinationContent);
         eventlist.appendChild(destinationBox);
 
-        checkUserEvent(res[i]["id"]);
+       var response = await checkUserEvent(res[i]["id"]);
+         if(response.response==="true"){
 
+         	li3.setAttribute("style", "visibility:visible");
+         	        li1.setAttribute("style", "visibility:visible");
+
+         }else{
+         	li3.setAttribute("style", "visibility:hidden");
+         	         	        li1.setAttribute("style", "visibility:hidden");
+
+
+         }
     }
 
 }
 
 function checkUserEvent(idevent) {
-    var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/checkeventuser";
+   return new Promise((resolve,reject)=>{
+var xhr = new XMLHttpRequest();
+    var url = "http://10.0.2.2:8000/checkeventuser";
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             var jsonData = JSON.parse(xhr.responseText);
-
-
-            if (jsonData["response"] == "false") {
+              resolve(jsonData)
+          
+           /* if (jsonData["response"] === "false") {
                 $(".deletebtn").attr("style", "display:none;");
                 $(".updatebtn").attr("style", "display:none;");
 
-            }
+            }*/
 
 
         }
     };
-    var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "idevent": idevent });
+    var data = JSON.stringify({ "token": token, "idevent": idevent });
     xhr.send(data);
+
+
+   }) 
 }
 
 function showEventDetail(eventid) {
 
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/GetEventById/" + eventid;
+    var url = "http://10.0.2.2:8000/GetEventById/" + eventid;
     xhr.open("GET", url, true);
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -300,7 +319,7 @@ function deleteAction() {
     }
     // inisialize carousel 
     $('.owl-carousel').trigger('destroy.owl.carousel');
-    var url = "http://localhost:8000/deleteEvent/" + selectedEvent;
+    var url = "http://10.0.2.2:8000/deleteEvent/" + selectedEvent;
     // Delete a product
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url, true);
@@ -308,7 +327,7 @@ function deleteAction() {
         if (xhr.readyState == 4 && xhr.status == "200") {
             var xhr1 = new XMLHttpRequest();
             // gt this week events not all events
-            var url = "http://localhost:8000/geteventofthisweek";
+            var url = "http://10.0.2.2:8000/geteventofthisweek";
             xhr1.open("GET", url, true);
             xhr1.onreadystatechange = function () {
                 if (xhr1.readyState === 4 && xhr1.status === 200) {
@@ -434,7 +453,7 @@ function updateEvent() {
     //loader show 
     $("#submitLoader").css("display", "block");
     var xhr = new XMLHttpRequest();
-    var url = "http://localhost:8000/updateEvent";
+    var url = "http://10.0.2.2:8000/updateEvent";
     xhr.open("POST", url, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
@@ -447,7 +466,7 @@ function updateEvent() {
         }
     };
     console.log(imgSrcs);
-    var data = JSON.stringify({ "id": selectedEvent, "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "image": imgSrcs, "contact": $("#upphone").val(), "date": $("#update").val(), "pointDepart": $("#updepart").val(), "pointArrive": $("#updestination").val(), "niveau": "", "nbrPlace": $("#upnbplace").val() });
+    var data = JSON.stringify({ "id": selectedEvent, "token": token, "title": $("#uptitle").val(), "type": $("#uptype").val(), "description": $("#updesc").val(), "prix": $("#upprice").val(), "image": imgSrcs, "contact": $("#upphone").val(), "date": $("#update").val(), "pointDepart": $("#updepart").val(), "pointArrive": $("#updestination").val(), "niveau": "", "nbrPlace": $("#upnbplace").val() });
     xhr.send(data);
 
 }

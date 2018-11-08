@@ -20,7 +20,7 @@ var register = (e) => {
 
 
         var xhr = new XMLHttpRequest()
-        xhr.open('POST', 'http://localhost:8000/register', true)
+        xhr.open('POST', 'http://10.0.2.2:8000/register', true)
 
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4) {

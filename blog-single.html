@@ -1,44 +1,47 @@
 <!DOCTYPE html>
 <!--[if lt IE 9 ]> <html class="lt_ie9"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class=""><!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" class="">
+<!--<![endif]-->
 
 <!-- Mirrored from premiumlayers.net/demo/html/hiking/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:55 GMT -->
+
 <head>
 	<meta charset="utf-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
 	<title>Blog Single - Hiking</title>
 
 	<!-- Standard Favicon -->
 	<link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-	
+
 	<!-- For iPhone 4 Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114x114-precomposed.png">
-	
+
 	<!-- For iPad: -->
 	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72x72-precomposed.html">
-	
+
 	<!-- For iPhone: -->
 	<link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57x57-precomposed.png">
-	
+
 	<!-- Library - Google Font Familys -->
-	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Nixie+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-	
+
 	<!-- Library - Bootstrap v3.3.5 -->
-    <link rel="stylesheet" type="text/css" href="libraries/lib.css">
-	
+	<link rel="stylesheet" type="text/css" href="libraries/lib.css">
+
 	<!-- Custom - Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="css/plugins.css">			
+	<link rel="stylesheet" type="text/css" href="css/plugins.css">
 	<link rel="stylesheet" type="text/css" href="css/navigation-menu.css">
 	<link rel="stylesheet" type="text/css" href="css/shortcode.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
@@ -84,7 +87,7 @@
 
 							<a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
 							<div class="profile-section">
-								<a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+								<a href="profile.html" id="imgprof"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
 
 							</div>
 
@@ -95,7 +98,7 @@
 								<li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
 								<li><a href="profile.html" title="Blog">PROFILE</a></li>
 								<li>
-									<a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+									<a href="events.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
 									 aria-expanded="false">EVENTS</a>
 									<i class="ddl-switch fa fa-angle-down"></i>
 									<ul class="dropdown-menu">
@@ -109,6 +112,9 @@
 										<li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
 									</ul>
 								</li>
+								<li>
+                                        <a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+                                    </li>
 							</ul>
 						</div>
 						<!--/.nav-collapse -->
@@ -118,9 +124,9 @@
 			</div>
 		</header><!-- Header Section /- -->
 
-	
+
 		<main>
-			
+
 			<!-- Page Header -->
 			<div class="container-fluid no-padding page-header">
 				<div class="container">
@@ -139,14 +145,14 @@
 						<!-- Type Post -->
 						<article class="type-post">
 							<div class="entry-cover">
-						       <div id="imagePost"> 
+								<div id="imagePost">
 
-							   </div>
-								
+								</div>
+
 							</div>
 							<div class="entry-meta">
 								<div class="post-like">
-									<a href="#"  onclick="HitLike(event)"><i id="likeicon" class="fa fa-heart"></i><span id="likes"></span></a>
+									<a href="#" onclick="HitLike(event)"><i id="likeicon" class="fa fa-heart"></i><span id="likes"></span></a>
 								</div>
 								<div class="post-comment">
 									<a href="#"><i class="fa fa-comment"></i> <span id="nbrcomments"></span></a>
@@ -154,73 +160,77 @@
 								<br>
 								<div class="byline">
 									<div id="profileimg"></div>
- 									By <a href="#">Admin</a>
+									By <a href="#">Admin</a>
 								</div>
 							</div>
 							<div class="entry-content">
-							 <div id="content"></div>
-							 <br>
-							 <div class="post-date" align="right" style="font-size:10px;color:rgb(119, 117, 117)"><span id="date"></span></div>
+								<div id="content"></div>
+								<br>
+								<div class="post-date" align="right" style="font-size:10px;color:rgb(119, 117, 117)"><span id="date"></span></div>
 							</div>
-							
+
 						</article><!-- Type Post /- -->
-						
+
 						<!-- Comments -->
-						<div class="post-comments">
-						
+						<div class="post-comments" id="ctt">
+
 							<div class="post-comments-detail">
-							
-								
-								<div class="mis-content-block">	
-								  <div id="comments"></div>
+
+								<div class="mis-content-block">
+									<div id="comments"></div>
 								</div>
-									
-							
+
+
 							</div>
 						</div><!-- Comments /- -->
-						
+
 						<!-- Comments Form -->
+						
 						<div class="comments-form">
 							<h3>comment</h3>
-							<div class="row" >
+							<div class="row">
+							<form onsubmit="comment(event);">
 								<div class="col-md-6">
-									<input type="text" id="comment" placeholder="Your comment " class="div-control" />
+									<input type="text" id="comment" class="form-control" placeholder="Your comment" class="div-control"  required="required"/>
 								</div>
 								<div class="col-md-12 send-btn">
-									<input type="button" value="send" onclick="comment()" />
+									<input type="submit" value="send" class="btn btn-success" />
 								</div>
+								</form>
 							</div>
+							
 						</div><!-- Comments Form /- -->
-						
+					
+
 					</div><!-- Content Area /- -->
-				
+
 				</div><!-- Row /- -->
 			</div>
 			<div class="padding-80"></div>
-				</div>
+	</div>
 
-		</main>
-		<!-- Footer Section -->
-		<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
+	</main>
+	<!-- Footer Section -->
+	<footer class="footer-main container-fluid no-padding footer-section2" style="padding-top: 30px;color: azure;">
 
-			Developed By: Dream Team
-			<p>Copyright &copy 2018</p>
+		Developed By: Dream Team
+		<p>Copyright &copy 2018</p>
 
-		</footer><!-- Footer Section /- -->
+	</footer><!-- Footer Section /- -->
 
-	
-			
+
+
 	<!--update comment-->
 	<div class="modal fade" id="update-comment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
-					Edit comment 
+					Edit comment
 				</div>
-				
-                <div class="modal-body">
 
-                  <input type="text" name="comment" id="commentToEdit">
+				<div class="modal-body">
+
+					<input type="text" name="comment" id="commentToEdit">
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -235,23 +245,23 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" style="background-color: #ffb215;color:#fff;padding-left: 35%;">
-					Confirm delete 
+					Confirm delete
 				</div>
-				
-                <div class="modal-body">
-                    Are you sure ? 
+
+				<div class="modal-body">
+					Are you sure ?
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-					<input id="Delete" type="button"onclick="supprimer()" class="btn btn-warning btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
+					<input id="Delete" type="button" onclick="supprimer()" class="btn btn-warning btn-ok" style="margin-top: 5px;margin-left: 0px;width: 100%;"
 					 value="Delete" />
 				</div>
 			</div>
 		</div>
 
-    </div>
+	</div>
 	<!----->
-	<script src="js/blog/blogSingle.js"></script>
+
 	<!-- JQuery v1.12.4 -->
 	<script src="js/jquery-1.12.4.min.js"></script>
 
@@ -260,8 +270,18 @@
 
 	<!-- Library - Theme JS -->
 	<script src="js/functions.js"></script>
+	<script src="js/blog/blogSingle.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/js/bootstrap-dialog.min.js"></script>
+	<script>
+			function Logout(event) {
+				event.preventDefault()
+				localStorage.clear()
+				window.location = "index.html"
+			}
+	
+		</script>
 </body>
 
 <!-- Mirrored from premiumlayers.net/demo/html/hiking/blog-single.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 06 Oct 2018 10:51:57 GMT -->
+
 </html>

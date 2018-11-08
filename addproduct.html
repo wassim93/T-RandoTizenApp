@@ -52,7 +52,7 @@
 
 </head>
 
-<body data-offset="200" data-spy="scroll" data-target=".ow-navigation">
+<body onload="getData();" data-offset="200" data-spy="scroll" data-target=".ow-navigation">
 	<div class="main-container">
 		<!-- Loader -->
 		<div id="site-loader" class="load-complete">
@@ -63,63 +63,67 @@
 			</div>
 		</div><!-- Loader /- -->
 
-		   <!-- Header Section -->
-        <header class="container-fluid no-padding header-section">
+		<!-- Header Section -->
+		<header class="container-fluid no-padding header-section">
 
-            <div class="container-fluid no-padding menu-block">
-                <!-- Container -->
-                <div class="container">
-                    <!-- nav -->
-                    <nav class="navbar navbar-default ow-navigation">
-                        <div class="navbar-header">
+			<div class="container-fluid no-padding menu-block">
+				<!-- Container -->
+				<div class="container">
+					<!-- nav -->
+					<nav class="navbar navbar-default ow-navigation">
+						<div class="navbar-header">
 
-                            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed"
-                             type="button">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
-                                </span>
-                                <span class="icon-bar">
+							<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed"
+							 type="button">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar">
+								</span>
+								<span class="icon-bar">
+								</span>
+								<span class="icon-bar">
 
-                                </span>
-                            </button>
+								</span>
+							</button>
 
-                            <a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
-                            <div class="profile-section">
-                                <a href="profile.html"><img class="profile-image" src="images/testi-1.jpg" alt="profilepic" /></a>
+							<a href="index-2.html" class="navbar-brand"><img src="images/logo.png" alt="logo" /></a>
+							<div class="profile-section">
+								<a href="profile.html"><span id="imgprof"></span></a>
 
-                            </div>
+							</div>
 
-                        </div>
-                        <div class="navbar-collapse collapse" id="navbar">
-                            <hr style="margin-bottom: 0px;">
-                            <ul class="nav navbar-nav" style="margin-top: 0px;">
-                                <li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
-                                <li><a href="profile.html" title="Blog">PROFILE</a></li>
-                                <li>
-                                    <a href="destination.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
-                                     aria-expanded="false">EVENTS</a>
-                                    <i class="ddl-switch fa fa-angle-down"></i>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
-                                    <i class="ddl-switch fa fa-angle-down"></i>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <!--/.nav-collapse -->
+						</div>
+						<div class="navbar-collapse collapse" id="navbar">
+							<hr style="margin-bottom: 0px;">
+							<ul class="nav navbar-nav" style="margin-top: 0px;">
+								<li class="active dropdown"><a href="blog.html" title="Blog">HOME</a></li>
+								<li><a href="profile.html" title="Blog">PROFILE</a></li>
+								<li>
+									<a href="events.html" title="Destination" class="dropdown-toggle" role="button" aria-haspopup="true"
+									 aria-expanded="false">EVENTS</a>
+									<i class="ddl-switch fa fa-angle-down"></i>
+									<ul class="dropdown-menu">
+										<li><a href="addevent.html" title="Add Event">ADD EVENTS</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="shop.html" title="shop" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">SHOP</a>
+									<i class="ddl-switch fa fa-angle-down"></i>
+									<ul class="dropdown-menu">
+										<li><a href="addproduct.html" title="Add Product">ADD Product</a></li>
+									</ul>
+								</li>
 
-                    </nav><!-- nav /- -->
-                </div><!-- Container /- -->
-            </div>
-        </header><!-- Header Section /- -->
+								<li>
+									<a href="#" onclick="Logout(event)" title="shop" class="dropdown-toggle">Logout</a>
+								</li>
+							</ul>
+						</div>
+						<!--/.nav-collapse -->
+
+					</nav><!-- nav /- -->
+				</div><!-- Container /- -->
+			</div>
+		</header><!-- Header Section /- -->
 		<main>
 
 			<!-- Page Header -->
@@ -232,6 +236,17 @@
 
 
 	<script>
+
+//Bind hardware back button.
+window.addEventListener('tizenhwkey', function onTizenHwKey(e) {
+    if (e.keyName === 'back') {
+    	window.history.back();
+    }
+});
+		function getData() {
+			document.getElementById("imgprof").innerHTML = `<img class="profile-image" style="width:50px;height:50px;border-radius:50%" src="http://10.0.2.2:8000/image/${localStorage.getItem("profile_image")}" alt="profilepic" />`
+
+		}
 		var imgSrcs = [];
 
 		$(document).ready(function () {
@@ -309,6 +324,9 @@
 
 		function SaveProduct() {
 
+			var token = {
+				token: localStorage.getItem('access_token')
+			}
 			//loader show 
 			$("#submitLoader").css("display", "block");
 			var xhr = new XMLHttpRequest();
@@ -323,7 +341,7 @@
 					);
 				}
 			};
-			var data = JSON.stringify({ "token": "MzE5MDQ3ZTkwNjZlNzYxMDNlMTZjMzExOTcyN2M1OTBiM2MyOWNjYzIxZjlhOWM3Y2QzODEyZGEwM2U5OTE3OQ", "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "images": imgSrcs, "contact": $("#phone").val(), "date": new Date() });
+			var data = JSON.stringify({ "token": token, "title": $("#title").val(), "type": $("#type").val(), "description": $("#desc").val(), "prix": $("#price").val(), "images": imgSrcs, "contact": $("#phone").val(), "date": new Date() });
 			xhr.send(data);
 
 		}
@@ -331,6 +349,16 @@
 
 
 
+
+	</script>
+
+
+	<script>
+		function Logout(event) {
+			event.preventDefault()
+			localStorage.clear()
+			window.location = "index.html"
+		}
 
 	</script>
 

@@ -1,0 +1,52 @@
+body {
+  background-color: #ffb215;
+}
+
+svg {
+  max-width: 80%;
+  max-height: 80%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+svg path, svg polygon {
+  fill-opacity: 0;
+  fill: #fff !important;
+  stroke: #fff;
+  stroke-width: 2;
+  stroke-dasharray: 3319;
+  stroke-dashoffset: 3319;
+  animation-name: draw;
+  animation-duration: 5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+svg #Shadows__x28_positive_x29_ path, svg #Shadows__x28_positive_x29_ polygon {
+  animation-delay: 4s;
+}
+
+@keyframes draw {
+  90% {
+    stroke-dashoffset: 0;
+    stroke-width: 2;
+    fill-opacity: 0;
+  }
+  100% {
+    stroke-width: 0;
+    fill-opacity: 1;
+  }
+}
+
+#title{
+margin-top: 100%;
+margin-left: 35%;
+font-size: 60px;
+color: white;
+font-family:cursive;
+margin-right: 20%;
+}
+

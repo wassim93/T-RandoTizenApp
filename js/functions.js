@@ -22,6 +22,10 @@
 (function ($) {
   "use strict";
 
+
+
+  
+
   /* - Comment Slider */
   function chkActiveSlider() {
     var slideNum = 0;
@@ -462,32 +466,7 @@
 
     /* - Comment Slider */
 
-    if ($(".post-comments-slider").length) {
-      setInterval(chkActiveSlider, 1000);
-    }
-    if ($(".post-comments-slider").length) {
-      var slider = $(".mis-stage").miSlider({
-        speed: 1000,
-        stageHeight: false,
-        slidesLoaded: true,
-        slidesOnStage: false,
-        navList: false,
-        navButtons: true,
-        slidePosition: "center",
-        slideStart: "mid",
-        slideScaling: 100,
-        offsetV: 0,
-        centerV: true,
-        navButtonsShow: false,
-        navButtonsOpacity: 0
-      });
-      $(".mis-navi .b-m-prev").on("click", function () {
-        $(".mis-prev").trigger("click");
-      });
-      $(".mis-navi .b-m-next").on("click", function () {
-        $(".mis-next").trigger("click");
-      });
-    }
+
 
     /* - Photographs Section */
     if ($(".photographs-section").length) {
